@@ -158,8 +158,7 @@ public class Inventory : MonoBehaviour
 
     public void OnDropButton()
     {
-        ThrowItem(selectedItem.item);
-        RemoveSelectedItem();
+        
     }
 
     private void ThrowItem(ItemData item)
