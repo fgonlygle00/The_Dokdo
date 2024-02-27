@@ -17,6 +17,12 @@ public enum ConsumableType
     Stemina // 스테미나
 }
 
+public class ItemDataConsumable // 어떤 타입에 어떤 능력치
+{
+    public ConsumableType type;
+    public float value;
+}
+
 [CreateAssetMenu(fileName = "Item", menuName = "New Item")]
 public class ItemData : ScriptableObject // 상속
 {
@@ -30,4 +36,5 @@ public class ItemData : ScriptableObject // 상속
     [Header("Stacking")]
     public bool canStack;
     public int maxStackAmount;
+    internal object consumables;
 }
