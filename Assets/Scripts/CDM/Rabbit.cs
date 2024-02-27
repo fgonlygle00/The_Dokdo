@@ -47,13 +47,24 @@ public class Rabbit : MonoBehaviour
 		// 플레이어와의 거리 계산 
 		playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
+		if (playerDistance < data.safeDistance) 
+		{
+			SetState(AIState.Fleeing);
+		}
+		else if (playerDistance >= data.safeDistance && aiState == AIState.Fleeing) // 도망 상태에서 안전 거리 이상이 되면 배회 상태로 전환
+		{
+			SetState(AIState.Wandering);
+		}
 		// 이동에 따른 애니메이터 업데이트
 		//animator.SetBool("Moving", aiState != AIState.Idle);
 
 		// 현재 AI 상태에 따른 행동 처리
+
+		Debug.Log(aiState);
+
 		switch (aiState)
 		{
-			case AIState.Idle: PassiveUpdate(); break;
+			case AIState.Idle: 
 			case AIState.Wandering: PassiveUpdate(); break;
 			case AIState.Fleeing: FleeingUpdate(); break;
 		}
@@ -62,13 +73,9 @@ public class Rabbit : MonoBehaviour
 	// 도망 상태에서의 업데이트 로직
 	private void FleeingUpdate()
 	{
-		if (agent.remainingDistance < 0.1f)
+		if (!agent.pathPending && agent.remainingDistance < 0.1f)
 		{
-			agent.SetDestination(GetFleeLocation());            // 현재 목적지에 가까워지면 새로운 도망 위치 설정
-		}
-		else
-		{
-			SetState(AIState.Wandering);                        // 도망 상태가 아니면 배회로 전환
+			agent.SetDestination(GetFleeLocation()); // 새로운 도망 위치 설정
 		}
 	}
 
