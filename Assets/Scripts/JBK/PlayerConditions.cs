@@ -37,10 +37,10 @@ public class Condition
 
 }
 
-
 public class PlayerConditions : MonoBehaviour, IDamagable
 {
     public Condition health;
+    public Condition stress;
     public Condition hunger;
     public Condition stamina;
 
@@ -48,9 +48,17 @@ public class PlayerConditions : MonoBehaviour, IDamagable
 
     public UnityEvent onTakeDamage;
 
+    private bool isRunning = false;
+    public float runningStaminaDrainRate = 10f;
+
+    private bool isFacingMonster = false;
+    private bool isAffectedByMonster = false;
+
+
     void Start()
     {
         health.curValue = health.startValue;
+        stress.curValue = stress.startValue;
         hunger.curValue = hunger.startValue;
         stamina.curValue = stamina.startValue;
     }
@@ -59,7 +67,8 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     void Update()
     {
         hunger.Subtract(hunger.decayRate * Time.deltaTime);
-        stamina.Add(stamina.regenRate * Time.deltaTime);
+
+        stress.Subtract(stress.decayRate * Time.deltaTime);
 
         if (hunger.curValue == 0.0f)
             health.Subtract(noHungerHealthDecay * Time.deltaTime);
@@ -67,7 +76,18 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         if (health.curValue == 0.0f)
             Die();
 
+        if (!isRunning)
+            stamina.Add(stamina.regenRate * Time.deltaTime);
+
+        if (isAffectedByMonster)
+        {
+            // 시야가 좁아지고 속도가 감소하는 등의 상태 변화 적용
+            // 이 부분은 상황에 따라서 구현해야 합니다.
+            // fsm 에 스트레스상태넣고 stress 를 받을때 canvas 까만색 이미지
+        }
+
         health.uiBar.fillAmount = health.GetPercentage();
+        stress.uiBar.fillAmount = stress.GetPercentage();
         hunger.uiBar.fillAmount = hunger.GetPercentage();
         stamina.uiBar.fillAmount = stamina.GetPercentage();
     }
@@ -80,6 +100,14 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     public void Eat(float amount)
     {
         hunger.Add(amount);
+    }
+
+    public void getStress(float amount)
+    {
+        // 몬스터를 바라볼 시, 스트레스 증가
+        // 시야 좁아짐
+        // 속도 줄어듦
+        // 받는 데미지 추가
     }
 
     public bool UseStamina(float amount)
@@ -100,5 +128,29 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     {
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
+    }
+
+    public void StartRunning()
+    {
+        if (UseStamina(runningStaminaDrainRate * Time.deltaTime))
+        {
+            isRunning = true;
+        }
+    }
+
+    public void StopRunning()
+    {
+        isRunning = false;
+    }
+
+    public void SetFacingMonster(bool value)
+    {
+        isFacingMonster = value;
+    }
+
+    // 외부에서 몬스터의 영향을 받는지 여부를 설정할 수 있는 메서드
+    public void SetAffectedByMonster(bool value)
+    {
+        isAffectedByMonster = value;
     }
 }
