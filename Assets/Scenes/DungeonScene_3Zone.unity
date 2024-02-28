@@ -6989,6 +6989,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1073938439}
   - component: {fileID: 1073938440}
+  - component: {fileID: 1073938441}
   m_Layer: 0
   m_Name: 3Zone_Trigger
   m_TagString: Untagged
@@ -7032,6 +7033,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.67, y: 10.41, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1073938441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073938438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6787821105551fc4d9af09c0b89f9f72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1093988282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7305,11 +7318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4896766740774158, guid: 2b41853036497ac4fa1d212a15ccff4c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1071.0614
+      value: -1071.0331
       objectReference: {fileID: 0}
     - target: {fileID: 4896766740774158, guid: 2b41853036497ac4fa1d212a15ccff4c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 129.04315
+      value: 129.0441
       objectReference: {fileID: 0}
     - target: {fileID: 4896766740774158, guid: 2b41853036497ac4fa1d212a15ccff4c, type: 3}
       propertyPath: m_LocalRotation.w

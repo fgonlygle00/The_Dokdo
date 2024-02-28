@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class DungeonSceneLoad2Zone : MonoBehaviour
 {
@@ -7,7 +6,7 @@ public class DungeonSceneLoad2Zone : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("DungeonScene_2Zone");
+            LoadingSceneManager.LoadScene("DungeonScene_2Zone");
         }
     }
 }
