@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33000011161094246}
   - component: {fileID: 23000010390713830}
   - component: {fileID: 64000013033198230}
+  - component: {fileID: 5131643121516509607}
   m_Layer: 0
   m_Name: RHEF_RockMediumC
   m_TagString: Untagged
@@ -106,3 +107,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 742263ad15a97bc49a4f7df707e63198, type: 3}
+--- !u!208 &5131643121516509607
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010357584986}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.8270001, y: 2.756, z: 4.1210003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.113000005, y: -0.363, z: 0.037}
+  m_TimeToStationary: 0.5

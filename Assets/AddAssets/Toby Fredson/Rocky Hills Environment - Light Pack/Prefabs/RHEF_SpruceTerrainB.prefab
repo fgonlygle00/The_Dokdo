@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33000012187390908}
   - component: {fileID: 23000013175485246}
   - component: {fileID: 64000011015796732}
+  - component: {fileID: -4279493537897522679}
   m_Layer: 0
   m_Name: RHEF_SpruceTerrainB
   m_TagString: Untagged
@@ -107,3 +108,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 59cbdc64f3ac49c4db5f5808cb9de3d1, type: 3}
+--- !u!208 &-4279493537897522679
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010819948620}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 7.3440003, y: 23.091002, z: 6.584}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 1.2750001, y: 17.914001, z: -0.13900001}
+  m_TimeToStationary: 0.5
