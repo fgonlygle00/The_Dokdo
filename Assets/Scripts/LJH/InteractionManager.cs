@@ -28,12 +28,10 @@ public class InteractionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera = Camera.main; // 싱글톤처럼 작동
+        camera = Camera.main;
     }
 
-
-    
-    // 플레이어 카메라 시점 부분
+    // Update is called once per frame
     void Update()
     {
         if (Time.time - lastCheckTime > checkRate)
@@ -52,7 +50,7 @@ public class InteractionManager : MonoBehaviour
                     SetPromptText();
                 }
             }
-            else // 충돌한 게 없다면 null
+            else
             {
                 curInteractGameobject = null;
                 curInteractable = null;
@@ -61,7 +59,7 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
-    private void SetPromptText() // 상호작용 키
+    private void SetPromptText()
     {
         promptText.gameObject.SetActive(true);
         promptText.text = string.Format("<b>[E]</b> {0}", curInteractable.GetInteractPrompt());
@@ -69,7 +67,7 @@ public class InteractionManager : MonoBehaviour
 
     public void OnInteractInput(InputAction.CallbackContext callbackContext)
     {
-        if (callbackContext.phase == InputActionPhase.Started && curInteractable != null)
+        if (callbackContext.phase == InputActionPhase.Started && curInteractable != null) // 조건 충족할 때
         {
             curInteractable.OnInteract();
             curInteractGameobject = null;

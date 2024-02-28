@@ -201,35 +201,50 @@ public class Inventory : MonoBehaviour
 
     public void OnUseButton()
     {
-        //if (selectedItem.item.type == ItemType.Consumable)
-        //{
-        //    for (int i = 0; i < selectedItem.item.consumables.Length; i++)
-        //    {
-        //        switch (selectedItem.item.consumables[i].type)
-        //        {
-        //            case ConsumableType.Health:
-        //                condition.Heal(selectedItem.item.consumables[i].value); break;
-        //            case ConsumableType.Hunger:
-        //                condition.Eat(selectedItem.item.consumables[i].value); break;
-        //        }
-        //    }
-        //}
-        //RemoveSelectedItem();
+        if (selectedItem.item.type == ItemType.Consumable)
+        {
+            for (int i = 0; i < selectedItem.item.consumables.Length; i++)
+            {
+                switch (selectedItem.item.consumables[i].type)
+                {
+                    case ConsumableType.Health:
+                        condition.Heal(selectedItem.item.consumables[i].value); break;
+                    case ConsumableType.Hunger:
+                        condition.Eat(selectedItem.item.consumables[i].value); break;
+                }
+            }
+        }
+        RemoveSelectedItem();
     }
 
     public void OnEquipButton()
     {
+        if (uiSlots [curEquipIndex].equipped)
+        {
+            UnEquip(curEquipIndex);
+        }
 
+        uiSlots[selectedItemIndex].equipped = true;
+        curEquipIndex = selectedItemIndex;
+        EquipManager.instance.EquipNew(selectedItem.item);
+        UpdateUI();
+
+        SelectItem(selectedItemIndex);
     }
 
     void UnEquip(int index)
     {
+        uiSlots[index].equipped = false;
+        EquipManager.instance.UnEquip();
+        UpdateUI();
 
+        if (selectedItemIndex == index)
+            SelectItem(index);
     }
 
     public void OnUnEquipButton()
     {
-
+        UnEquip(curEquipIndex);
     }
 
     public void OnDropButton()

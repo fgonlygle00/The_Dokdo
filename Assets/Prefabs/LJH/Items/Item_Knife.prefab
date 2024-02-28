@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 6511678642810990737}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2374516057495404589
 Rigidbody:
@@ -152,7 +152,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 4K_Knife_Polymer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6347800078495885255, guid: e6f977f95f61db940ac13170b9646a2d, type: 3}
+    - {fileID: 6347800078495860777, guid: e6f977f95f61db940ac13170b9646a2d, type: 3}
+    - {fileID: 5247970336784614361, guid: e6f977f95f61db940ac13170b9646a2d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
