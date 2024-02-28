@@ -6,7 +6,7 @@ public class Pig : MonoBehaviour
 {
 	public MonsterDataSO data;
 
-	private AIState aiState;
+	public AIState aiState;
 
 	[Header("Wandering")]
 	public float minWanderDistance;
@@ -45,8 +45,17 @@ public class Pig : MonoBehaviour
 
 	private void Update()
 	{
-		// 플레이어와의 거리 계산 : 현재 플레이어가 없어 주석처리함.
+		// 플레이어와의 거리 계산 
 		playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
+
+		if (playerDistance < data.safeDistance)
+		{
+			 SetState(AIState.Attacking);
+		}
+		else if (playerDistance >= data.safeDistance && aiState == AIState.Attacking) 
+		{
+			SetState(AIState.Wandering);
+		}
 
 		// 이동에 따른 애니메이터 업데이트
 		//animator.SetBool("Moving", aiState != AIState.Idle);
@@ -57,22 +66,7 @@ public class Pig : MonoBehaviour
 			case AIState.Idle: PassiveUpdate(); break;  // 대기 상태
 			case AIState.Wandering: PassiveUpdate(); break; // 배회 상태
 			case AIState.Attacking: AttackingUpdate(); break; // 공격 상태
-			case AIState.Fleeing: FleeingUpdate(); break;		// 도망 상태
 		}
-	}
-
-	// 도망 상태에서의 업데이트 로직
-	private void FleeingUpdate()
-	{
-		if (agent.remainingDistance < 0.1f)
-		{
-			agent.SetDestination(GetFleeLocation());            // 현재 목적지에 가까워지면 새로운 도망 위치 설정
-		}
-		else
-		{
-			SetState(AIState.Wandering);                        // 도망 상태가 아니면 배회로 전환
-		}
-		Debug.Log("도망 상태");
 	}
 
 	// 공격 상태에서의 업데이트 로직
@@ -85,6 +79,7 @@ public class Pig : MonoBehaviour
 			if (playerDistance > maxWanderDistance)
 			{
 				SetState(AIState.Wandering);
+				Debug.Log(playerDistance);
 				return; // 메서드 종료
 			}
 
@@ -99,7 +94,7 @@ public class Pig : MonoBehaviour
 			else
 			{
 				// 경로를 계산할 수 없는 경우, 도망 상태로 전환
-				SetState(AIState.Fleeing);
+				SetState(AIState.Wandering);
 			}
 		}
 		// 플레이어가 공격 범위 안에 있고 시야 안에 있는 경우
@@ -111,21 +106,24 @@ public class Pig : MonoBehaviour
 			{
 				// 마지막 공격 이후 충분한 시간이 경과했으면 공격 실행
 				lastAttackTime = Time.time;	// 마지막 공격 시간을 현재로 업데이트
-				// PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(data.damage);	// 플레이어에게 물리적 피해를 주는 코드
+				//PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(data.damage);  // 플레이어에게 물리적 피해를 주는 코드
 				// animator.speed = 1;		// 애니메이션 속도를 정상으로 설정
 				// animator.SetTrigger("Attack");		// 공격 애니메이션 트리거
+				// 공격 사운드 재생
+				// audioSource.PlayOneShot(attackSound);
 			}
 		}
 
-		// 공격 사운드 재생
-		// audioSource.PlayOneShot(attackSound);
+		
 	}
 
 	// 정지 및 배회 상태에서의 업데이트 로직
 	private void PassiveUpdate()
 	{
-		if (aiState == AIState.Wandering && agent.remainingDistance < 0.1f)
+		Debug.Log(agent.remainingDistance);
+		if (aiState == AIState.Wandering && agent.remainingDistance < 2.0f)
 		{
+		
 			// 배회 목적지에 도달하면 정지 상태로 전환
 			SetState(AIState.Idle);
 			// 다음 배회 예약
@@ -175,12 +173,6 @@ public class Pig : MonoBehaviour
 				break;
 
 			case AIState.Attacking:                        
-				{
-					agent.speed = data.runSpeed;            // NavMeshAgent의 이동 속도를 뛰는 속도로 설정합니다.
-					agent.isStopped = false;                // NavMeshAgent가 목적지로 이동할 수 있도록 합니다.
-				}
-				break;
-			case AIState.Fleeing:                           // AI 상태가 Fleeing(도망)일 때
 				{
 					agent.speed = data.runSpeed;            // NavMeshAgent의 이동 속도를 뛰는 속도로 설정합니다.
 					agent.isStopped = false;                // NavMeshAgent가 목적지로 이동할 수 있도록 합니다.
@@ -240,48 +232,6 @@ public class Pig : MonoBehaviour
 
 		return hit.position;        // 최종적으로 찾은 위치를 반환한다. 이 위치는 캐릭터가 배회할 새로운 목적지이다.
 	}
-
-	// 도망 위치 계산
-	Vector3 GetFleeLocation()
-	{
-		NavMeshHit hit;             // NavMeshHit 구조체를 선언한다. 이 구조체는 NavMesh 샘플링 결과를 저장하는 데 사용된다.
-
-		// 현재 위치에서 무작위 방향으로 안전 거리(data.safeDistance)만큼 떨어진 지점에 대한 NavMesh 샘플링을 시도한다.
-		// SamplePosition은 해당 지점이 NavMesh 상에 있는지 확인하고, 있으면 그 위치를 hit 변수에 저장한다.
-		NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * data.safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
-
-		
-		int i = 0;              // 시도 횟수를 추적하기 위한 변수 i를 초기화한다.
-
-		// 샘플링된 위치가 플레이어로부터의 각도가 90도 이상이고, 플레이어로부터의 거리가 안전 거리(data.safeDistance) 이상인지 확인한다.
-		while (GetDestinationAngle(hit.position) > 90 || playerDistance < data.safeDistance)
-		{
-			// 조건을 충족하지 않는 위치에 대해 새로운 위치에 대한 NavMesh 샘플링을 다시 시도한다.
-			NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * data.safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
-			i++;            // 시도 횟수를 증가시킨다.
-
-			// 만약 30번 시도했음에도 불구하고 적절한 위치를 찾지 못했다면, 루프를 종료한다.
-			// 이는 무한 루프에 빠지는 것을 방지하기 위함이다.
-			if (i == 30)
-				break;
-		}
-
-		// 최종적으로 찾은 위치를 반환한다. 이 위치는 캐릭터가 도망칠 때 사용할 도피 위치이다.
-		return hit.position;
-	}
-
-	float GetDestinationAngle(Vector3 targetPos)
-	{
-		// 플레이어의 위치에서 목표 위치까지의 방향 벡터를 계산한다.
-		Vector3 directionToTarget = targetPos - PlayerController.instance.transform.position;
-
-		// AI 캐릭터의 전방 벡터와, 플레이어 위치에서 목표 위치까지의 방향 벡터 사이의 각도를 계산한다.
-		float angle = Vector3.Angle(transform.forward, directionToTarget);
-
-		// 계산된 각도를 반환한다.
-		return angle;
-	}
-
 	// NPC가 받은 손상 처리
 	public void TakePhysicalDamage(int damageAmount)
 	{

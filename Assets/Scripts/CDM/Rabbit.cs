@@ -9,7 +9,7 @@ public class Rabbit : MonoBehaviour
 	public MonsterDataSO data;	
 
 	[Header("AI")]
-	private AIState aiState;            // 현재 AI 상태
+	public AIState aiState;            // 현재 AI 상태
 
 	[Header("Wandering")]
 	public float minWanderDistance;     // 최소 배회 거리
@@ -59,8 +59,6 @@ public class Rabbit : MonoBehaviour
 		//animator.SetBool("Moving", aiState != AIState.Idle);
 
 		// 현재 AI 상태에 따른 행동 처리
-
-		Debug.Log(aiState);
 
 		switch (aiState)
 		{
