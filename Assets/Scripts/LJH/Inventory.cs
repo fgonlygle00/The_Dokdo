@@ -244,7 +244,7 @@ public class Inventory : MonoBehaviour
 
     public void OnUnEquipButton()
     {
-        UnEquip(curEquipIndex);
+        UnEquip(selectedItemIndex);
     }
 
     public void OnDropButton()
