@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33000011896164112}
   - component: {fileID: 23000014037874640}
   - component: {fileID: 64000013799792638}
+  - component: {fileID: -8594013055549458131}
   m_Layer: 0
   m_Name: RHEF_GenericCliffB
   m_TagString: Untagged
@@ -106,3 +107,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: f36c103ec749c4f4da290838375b2114, type: 3}
+--- !u!208 &-8594013055549458131
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011070547914}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 31.619001, y: 11.002001, z: 16.067001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -1.4790001, y: 7.2710004, z: -2.7510002}
+  m_TimeToStationary: 0.5
