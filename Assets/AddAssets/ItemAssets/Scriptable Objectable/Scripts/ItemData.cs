@@ -17,6 +17,7 @@ public enum ConsumableType
     Stemina // 스테미나
 }
 
+[System.Serializable]
 public class ItemDataConsumable // 어떤 타입에 어떤 능력치
 {
     public ConsumableType type;
@@ -36,5 +37,10 @@ public class ItemData : ScriptableObject // 상속
     [Header("Stacking")]
     public bool canStack;
     public int maxStackAmount;
-    internal object consumables;
+
+    [Header("Consumable")]
+    public ItemDataConsumable[] consumables;
+
+    [Header("Equip")]
+    public GameObject equipPrefab;
 }
