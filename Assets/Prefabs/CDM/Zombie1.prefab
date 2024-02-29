@@ -2185,7 +2185,7 @@ Transform:
   - {fileID: 6712167140225584768}
   - {fileID: 4858108247336543915}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2257108261677825471
 Animator:
@@ -2242,10 +2242,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 875585ca2600cf641a144e8fecdb5408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: aca37588ba7b4bf438c05d6e13f3dfbb, type: 2}
   State: 0
+  dropOnDeath: []
   traceDistance: 10
   attackDistance: 2
+  wanderDistance: 20
   isDie: 0
+  audioSource: {fileID: 0}
+  attackSound: {fileID: 0}
+  damageSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  wanderSound: {fileID: 0}
 --- !u!1 &6265843260367301853
 GameObject:
   m_ObjectHideFlags: 0

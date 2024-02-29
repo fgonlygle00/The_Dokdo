@@ -3,23 +3,39 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Zombie : MonoBehaviour
 {
+	public MonsterDataSO data;
+
 	// 몬스터의 현재 상태
 	public AIState State;
+	public ItemData[] dropOnDeath;
+
+
 	// 추적 사정거리
 	public float traceDistance = 10.0f;
 	// 공격 사정거리
 	public float attackDistance = 2.0f;
+	// 배회 사정거리
+	public float wanderDistance = 20.0f;
 	// 몬스터의 사망 여부
 	public bool isDie = false;
+
+	[Header("Sound")]
+	public AudioSource audioSource; // AudioSource 컴포넌트 참조를 위한 변수
+	public AudioClip attackSound; // 공격 사운드 클립
+	public AudioClip damageSound; // 피해 받았을 때 사운드 클립
+	public AudioClip deathSound; // 사망 사운드 클립
+	public AudioClip wanderSound; // 배회 사운드 클립
 
 	// Animoater 파라미터의 해시값 추출
 	private readonly int hashTrace = Animator.StringToHash("IsTrace");
 	private readonly int hashAttack = Animator.StringToHash("IsAttack");
+	private readonly int hashWander = Animator.StringToHash("IsWander");
 
 	private Transform monsterTr;
 	private Transform playerTr;
 	private NavMeshAgent agent;
 	private Animator anim;
+	private SkinnedMeshRenderer[] meshRenderers;        // 플래시 효과를 위한 SinnedMeshRenderer 컴포넌트에 대한 참조들
 
 
 	private void Start()
@@ -28,6 +44,7 @@ public class Zombie : MonoBehaviour
 		playerTr = PlayerController.instance.transform;
 		agent = GetComponent<NavMeshAgent>();
 		anim = GetComponent<Animator>();
+		meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 
 		// agent.SetDestination(playerTr.position);
 
@@ -61,7 +78,15 @@ public class Zombie : MonoBehaviour
 			}
 			else
 			{
-				State = AIState.Idle;
+				// Idle 상태에서 일정 확률로 Wandering 상태로 전환
+				if (Random.Range(0, 5) < 1) // 20% 확률로 배회 상태로 전환
+				{
+					State = AIState.Wandering;
+				}
+				else
+				{
+					State = AIState.Idle;
+				}
 			}
 		}
 	}
@@ -89,12 +114,86 @@ public class Zombie : MonoBehaviour
 					anim.SetBool(hashAttack, true);
 					break;
 
-				case AIState.Die:
+				case AIState.Wandering:
+					agent.isStopped = false;
+					anim.SetBool(hashWander, true);
+					// 배회 지점 설정
+					Vector3 wanderPoint = RandomWanderPoint();
+					agent.SetDestination(wanderPoint);
 					break;
 			}
 			yield return new WaitForSeconds(0.3f);
 		}
-		
+
+	}
+
+	private Vector3 RandomWanderPoint()
+	{
+		// 좀비의 전방을 나타내는 벡터와 후방을 나타내는 벡터 중 하나를 무작위로 선택
+		Vector3 forward = transform.forward;
+		Vector3 backward = -transform.forward;
+		Vector3 direction = Random.Range(0, 2) == 0 ? forward : backward;
+
+		// 무작위로 결정된 방향에 무작위 거리를 적용
+		Vector3 wanderPoint = transform.position + direction * Random.Range(1.0f, wanderDistance);
+
+		// 이동할 위치가 NavMesh 위에 있는지 확인
+		NavMeshHit navHit;
+		NavMesh.SamplePosition(wanderPoint, out navHit, wanderDistance, -1);
+
+		return navHit.position;
+
+	}
+
+	// NPC가 받은 손상 처리
+	public void TakePhysicalDamage(int damageAmount)
+	{
+		data.health -= damageAmount;
+		if (data.health <= 0)
+			Die();
+
+		// 손상 받았을 때의 플래시 효과
+		StartCoroutine(DamageFlash());
+
+		// 피해 받았을 때의 사운드 재생
+		// audioSource.PlayOneShot(damageSound);
+	}
+
+	// NPC 사망 처리
+	void Die()
+	{
+		// 사망 사운드 재생
+		// audioSource.PlayOneShot(deathSound);
+
+		for (int x = 0; x < dropOnDeath.Length; x++)
+		{
+			Instantiate(dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+		}
+
+		// NPC 오브젝트 파괴
+		Destroy(gameObject);
+	}
+
+	// 손상 플래시 효과를 위한 코루틴
+	IEnumerator DamageFlash()
+	{
+		// 모든 메쉬 렌더러를 순회하는 반복문입니다.
+		for (int x = 0; x < meshRenderers.Length; x++)
+		{
+			// 현재 메쉬 렌더러의 재질 색상을 빨간색 계열로 변경하여 데미지를 받았음을 표시합니다.
+			// 여기서 색상 값은 R=1.0, G=0.6, B=0.6으로 설정되어, 약간 붉은색을 띕니다.
+			meshRenderers[x].material.color = new Color(1.0f, 0.6f, 0.6f);
+		}
+
+		// 0.1초 동안 대기합니다. 이 시간 동안 캐릭터는 변경된 색상으로 표시됩니다.
+		yield return new WaitForSeconds(0.1f);
+
+		// 대기 시간이 지난 후, 모든 메쉬 렌더러의 색상을 다시 원래대로 (흰색) 변경합니다.
+		// 이로써 데미지를 받은 효과가 일시적임을 나타냅니다.
+		for (int x = 0; x < meshRenderers.Length; x++)
+		{
+			meshRenderers[x].material.color = Color.white;
+		}
 	}
 
 	private void OnDrawGizmos()

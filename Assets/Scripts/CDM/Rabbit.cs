@@ -6,10 +6,18 @@ using UnityEngine.AI;
 
 public class Rabbit : MonoBehaviour
 {
-	public MonsterDataSO data;	
+	public MonsterDataSO data;
+
+	[Header("Stats")]
+	public float walkSpeed;
+	public float runSpeed;
+	public ItemData[] dropOnDeath;
 
 	[Header("AI")]
-	public AIState aiState;            // 현재 AI 상태
+
+	private AIState aiState;
+	public float detectDistance;
+	public float safeDistance;            
 
 	[Header("Wandering")]
 	public float minWanderDistance;     // 최소 배회 거리
@@ -25,14 +33,16 @@ public class Rabbit : MonoBehaviour
 
 	private float playerDistance;       // NPC와 플레이어 사이의 거리
 
+	public float fieldOfView = 120f;
+
 	private NavMeshAgent agent;         // NaveMeshAgent 컴포넌트에 대한 참조
- // private Animator animator;			// Animator 컴포넌트에 대한 참조
+    private Animator animator;			// Animator 컴포넌트에 대한 참조
 	private SkinnedMeshRenderer[] meshRenderers;        // 플래시 효과를 위한 SinnedMeshRenderer 컴포넌트에 대한 참조들
 
 	private void Awake()
 	{
 		agent = GetComponent<NavMeshAgent>();
-		// animator = GetComponentInChildren<Animator>();
+		animator = GetComponentInChildren<Animator>();
 		// audioSource = GetComponent<AudioSource>();			// AudioSource 컴포넌트 가져오기
 		meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 	}
@@ -47,11 +57,11 @@ public class Rabbit : MonoBehaviour
 		// 플레이어와의 거리 계산 
 		playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
-		if (playerDistance < data.safeDistance) 
+		if (playerDistance < safeDistance) 
 		{
 			SetState(AIState.Fleeing);
 		}
-		else if (playerDistance >= data.safeDistance && aiState == AIState.Fleeing) // 도망 상태에서 안전 거리 이상이 되면 배회 상태로 전환
+		else if (playerDistance >= safeDistance && aiState == AIState.Fleeing) // 도망 상태에서 안전 거리 이상이 되면 배회 상태로 전환
 		{
 			SetState(AIState.Wandering);
 		}
@@ -89,14 +99,6 @@ public class Rabbit : MonoBehaviour
 		}
 	}
 
-	// 플레이어가 시야각 내에 있는지 확인
-	bool IsPlaterInFireldOfView()
-	{
-		Vector3 directionToPlayer = PlayerController.instance.transform.position - transform.position;
-		float angle = Vector3.Angle(transform.forward, directionToPlayer);
-		return angle < data.fieldOfView * 0.5f;
-	}
-
 	// AI 상태를 설정하고 관련 속성 업데이트
 	private void SetState(AIState newState)
 	{
@@ -105,20 +107,20 @@ public class Rabbit : MonoBehaviour
 		{
 			case AIState.Idle:
 				{
-					agent.speed = data.walkSpeed;
+					agent.speed = walkSpeed;
 					agent.isStopped = true;
 				}
 				break;
 			case AIState.Wandering:
 				{
-					agent.speed = data.walkSpeed;
+					agent.speed = walkSpeed;
 					agent.isStopped = false;
 				}
 				break;
 
 			case AIState.Fleeing:
 				{
-					agent.speed = data.runSpeed;
+					agent.speed = runSpeed;
 					agent.isStopped = false;
 				}
 				break;
@@ -149,7 +151,7 @@ public class Rabbit : MonoBehaviour
 		NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
 
 		int i = 0;
-		while (Vector3.Distance(transform.position, hit.position) < data.detectDistance)
+		while (Vector3.Distance(transform.position, hit.position) < detectDistance)
 		{
 			NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
 			i++;
@@ -165,13 +167,13 @@ public class Rabbit : MonoBehaviour
 	{
 		NavMeshHit hit;
 
-		NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * data.safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
+		NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
 
 		int i = 0;
-		while (GetDestinationAngle(hit.position) > 90 || playerDistance < data.safeDistance)
+		while (GetDestinationAngle(hit.position) > 90 || playerDistance < safeDistance)
 		{
 
-			NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * data.safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
+			NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * safeDistance), out hit, maxWanderDistance, NavMesh.AllAreas);
 			i++;
 			if (i == 30)
 				break;
@@ -207,10 +209,10 @@ public class Rabbit : MonoBehaviour
 		// 사망 사운드 재생
 		// audioSource.PlayOneShot(deathSound);
 
-		//for (int x = 0; x < dropOnDeath.Length; x++)
-		//{
-		//	Instantiate(dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
-		//}
+		for (int x = 0; x < dropOnDeath.Length; x++)
+		{
+			Instantiate(dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+		}
 
 		// NPC 오브젝트 파괴
 		Destroy(gameObject);
