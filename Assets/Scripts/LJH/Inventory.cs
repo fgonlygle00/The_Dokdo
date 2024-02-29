@@ -172,11 +172,11 @@ public class Inventory : MonoBehaviour
         selectedItemStatNames.text = string.Empty;
         selectedItemStatValues.text = string.Empty;
 
-        //for (int i = 0; i < selectedItem.item.consumables.Length; i++)
-        //{
-        //    selectedItemStatNames.text += selectedItem.item.consumables[i].type.ToString() + "\n";
-        //    selectedItemStatValues.text += selectedItem.item.consumables[i].value.ToString() + "\n";
-        //}
+        for (int i = 0; i < selectedItem.item.consumables.Length; i++)
+        {
+            selectedItemStatNames.text += selectedItem.item.consumables[i].type.ToString() + "\n";
+            selectedItemStatValues.text += selectedItem.item.consumables[i].value.ToString() + "\n";
+        }
 
         useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
         equipButton.SetActive(selectedItem.item.type == ItemType.Equipable && !uiSlots[index].equipped);
@@ -219,7 +219,7 @@ public class Inventory : MonoBehaviour
 
     public void OnEquipButton()
     {
-        if (uiSlots [curEquipIndex].equipped)
+        if (uiSlots[curEquipIndex].equipped)
         {
             UnEquip(curEquipIndex);
         }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 52114323707297477}
   - component: {fileID: 1478347461822615623}
+  - component: {fileID: 8446405249164636391}
   m_Layer: 6
   m_Name: Equip_Pistol
   m_TagString: Untagged
@@ -50,6 +51,27 @@ MonoBehaviour:
   doesGatherResources: 0
   doesDealDamage: 0
   damage: 0
+--- !u!95 &8446405249164636391
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032744790359466038}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 71c677e0cfc1a2044a682f79e5f72812, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8868845087458324626
 PrefabInstance:
   m_ObjectHideFlags: 0

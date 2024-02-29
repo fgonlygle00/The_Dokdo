@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5291573974559978149}
   - component: {fileID: 7483968709664267170}
+  - component: {fileID: -1786579590216788631}
   m_Layer: 6
   m_Name: Equip_Knife
   m_TagString: Untagged
@@ -50,6 +51,27 @@ MonoBehaviour:
   doesGatherResources: 0
   doesDealDamage: 0
   damage: 0
+--- !u!95 &-1786579590216788631
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340889481361774424}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9a27331a158864a45914b380dd272060, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1548310112588105612
 PrefabInstance:
   m_ObjectHideFlags: 0
