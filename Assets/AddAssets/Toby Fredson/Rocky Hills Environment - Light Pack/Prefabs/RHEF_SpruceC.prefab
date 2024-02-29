@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: -6565496944844125890}
   - component: {fileID: -8783864156308518738}
   - component: {fileID: 640187251801594081}
+  - component: {fileID: -7453725226298835770}
   m_Layer: 0
   m_Name: RHEF_SpruceC
   m_TagString: Untagged
@@ -315,3 +316,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 1.1700001, y: 16.584002, z: -0.157}
   m_TimeToStationary: 0.5
+--- !u!114 &-7453725226298835770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013297751080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01dccd4eac660242a9d82c5cbaaf66b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToGive: {fileID: 11400000, guid: 5a32c299556e16c4892bc2196ae5e9a6, type: 2}
+  quantityPerHit: 1
+  capacity: 5
