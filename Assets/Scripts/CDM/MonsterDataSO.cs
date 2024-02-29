@@ -4,12 +4,5 @@ using UnityEngine;
 public class MonsterDataSO : ScriptableObject
 {
 	public int health;
-	public float walkSpeed;
-	public float runSpeed;
-	public int damage;
-	public float attackRate;
-	public float attackDistance;
-	public float detectDistance;
-	public float safeDistance;
-	public float fieldOfView = 120f;
+	
 }
