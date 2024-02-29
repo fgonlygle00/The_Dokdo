@@ -2,11 +2,19 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Pig : MonoBehaviour
+public class Pig : MonoBehaviour, IDamagable
 {
 	public MonsterDataSO data;
 
-	public AIState aiState;
+	[Header("Stats")]
+	public float walkSpeed;
+	public float runSpeed;
+	public ItemData[] dropOnDeath;
+
+	[Header("AI")]
+	private AIState aiState;
+	public float detectDistance;
+	public float safeDistance;
 
 	[Header("Wandering")]
 	public float minWanderDistance;
@@ -15,9 +23,14 @@ public class Pig : MonoBehaviour
 	public float maxWanderWaitTime;
 
 	[Header("Combat")]
+	public int damage;
+	public float attackRate;
 	private float lastAttackTime;
-	
+	public float attackDistance;
+
 	private float playerDistance;       // NPC와 플레이어 사이의 거리	
+
+	public float fieldOfView = 120f;
 
 	[Header("Sound")]
 	public AudioSource audioSource; // AudioSource 컴포넌트 참조를 위한 변수
@@ -48,11 +61,11 @@ public class Pig : MonoBehaviour
 		// 플레이어와의 거리 계산 
 		playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
-		if (playerDistance < data.safeDistance)
+		if (playerDistance < safeDistance)
 		{
 			 SetState(AIState.Attacking);
 		}
-		else if (playerDistance >= data.safeDistance && aiState == AIState.Attacking) 
+		else if (playerDistance >= safeDistance && aiState == AIState.Attacking) 
 		{
 			SetState(AIState.Wandering);
 		}
@@ -73,7 +86,7 @@ public class Pig : MonoBehaviour
 	private void AttackingUpdate()
 	{
 		// 플레이어와의 거리가 공격 범위 밖이거나 플레이어가 시야 안에 있지 않은 경우
-		if (playerDistance > data.attackDistance || !IsPlaterInFireldOfView())
+		if (playerDistance > attackDistance || !IsPlaterInFireldOfView())
 		{
 			// 플레이어와의 거리가 배회 거리보다 큰 경우, 배회 상태로 전환
 			if (playerDistance > maxWanderDistance)
@@ -102,11 +115,11 @@ public class Pig : MonoBehaviour
 		{
 			
 			agent.isStopped = true;		// AI를 멈추고 공격 준비
-			if (Time.time - lastAttackTime > data.attackRate)
+			if (Time.time - lastAttackTime > attackRate)
 			{
 				// 마지막 공격 이후 충분한 시간이 경과했으면 공격 실행
 				lastAttackTime = Time.time;	// 마지막 공격 시간을 현재로 업데이트
-				//PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(data.damage);  // 플레이어에게 물리적 피해를 주는 코드
+				PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(damage);  // 플레이어에게 물리적 피해를 주는 코드
 				// animator.speed = 1;		// 애니메이션 속도를 정상으로 설정
 				// animator.SetTrigger("Attack");		// 공격 애니메이션 트리거
 				// 공격 사운드 재생
@@ -131,7 +144,7 @@ public class Pig : MonoBehaviour
 		}
 
 		// 플레이어를 감지하면 공격 상태로 전환
-		if (playerDistance < data.detectDistance)
+		if (playerDistance < detectDistance)
 		{
 			SetState(AIState.Attacking);
 		}
@@ -148,7 +161,7 @@ public class Pig : MonoBehaviour
 
 		// 계산된 각도가 AI 캐릭터의 시야각의 절반보다 작은 경우 true를 반환
 		// 이는 플레이어가 AI의 시야 내에 있음을 의미
-		return angle < data.fieldOfView * 0.5f;
+		return angle < fieldOfView * 0.5f;
 	}
 
 	// AI 상태를 설정하고 관련 속성 업데이트
@@ -161,20 +174,20 @@ public class Pig : MonoBehaviour
 		{
 			case AIState.Idle:                              // AI 상태가 Idle(대기)일 때
 				{
-					agent.speed = data.walkSpeed;           // NavMeshAgent의 이동 속도를 걷는 속도로 설정합니다.
+					agent.speed = walkSpeed;           // NavMeshAgent의 이동 속도를 걷는 속도로 설정합니다.
 					agent.isStopped = true;                 // NavMeshAgent의 이동을 중지합니다.
 				}
 				break;
 			case AIState.Wandering:                         // AI 상태가 Wandering(배회)일 때
 				{
-					agent.speed = data.walkSpeed;           // NavMeshAgent의 이동 속도를 걷는 속도로 설정합니다.
+					agent.speed = walkSpeed;           // NavMeshAgent의 이동 속도를 걷는 속도로 설정합니다.
 					agent.isStopped = false;                // NavMeshAgent가 목적지로 이동할 수 있도록 합니다.
 				}
 				break;
 
 			case AIState.Attacking:                        
 				{
-					agent.speed = data.runSpeed;            // NavMeshAgent의 이동 속도를 뛰는 속도로 설정합니다.
+					agent.speed = runSpeed;            // NavMeshAgent의 이동 속도를 뛰는 속도로 설정합니다.
 					agent.isStopped = false;                // NavMeshAgent가 목적지로 이동할 수 있도록 합니다.
 				}
 				break;
@@ -218,7 +231,7 @@ public class Pig : MonoBehaviour
 		int i = 0;  // 시도 횟수를 추적하기 위한 변수 i를 초기화한다.
 
 		// 샘플링된 위치가 캐릭터의 감지 거리 내에 있는지 확인한다. 만약 그렇다면, 캐릭터가 쉽게 발견할 수 있는 위치이므로 다른 위치를 찾는다.
-		while (Vector3.Distance(transform.position, hit.position) < data.detectDistance)
+		while (Vector3.Distance(transform.position, hit.position) < detectDistance)
 		{
 			// 새로운 위치에 대한 NavMesh 샘플링을 다시 시도한다.
 			NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
@@ -252,10 +265,10 @@ public class Pig : MonoBehaviour
 		// 사망 사운드 재생
 		// audioSource.PlayOneShot(deathSound);
 
-		//for (int x = 0; x < dropOnDeath.Length; x++)
-		//{
-		//	Instantiate(dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
-		//}
+		for (int x = 0; x < dropOnDeath.Length; x++)
+		{
+			Instantiate(dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+		}
 
 		// NPC 오브젝트 파괴
 		Destroy(gameObject);
@@ -291,7 +304,7 @@ public class Pig : MonoBehaviour
 
 		// 공격 거리를 표시하는 기즈모 그리기
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, data.attackDistance);
+		Gizmos.DrawWireSphere(transform.position, attackDistance);
 
 		// AI의 위치와 시야각을 기준으로 기즈모를 그립니다.
 		Gizmos.color = Color.yellow;

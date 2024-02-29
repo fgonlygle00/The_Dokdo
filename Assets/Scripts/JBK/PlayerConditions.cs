@@ -31,7 +31,6 @@ public class Condition
     {
         return curValue / maxValue;
     }
-
 }
 
 public class PlayerConditions : MonoBehaviour, IDamagable

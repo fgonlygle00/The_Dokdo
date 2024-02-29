@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 266597be81f3f9e40a5be705ea7ccf7f, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 266597be81f3f9e40a5be705ea7ccf7f, type: 3}
       propertyPath: m_LocalScale.x
@@ -104,7 +104,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: d55416225dfef324399b69fe83991bf0, type: 2}
-  aiState: 0
+  walkSpeed: 1
+  runSpeed: 4
+  dropOnDeath: []
+  detectDistance: 5
+  safeDistance: 8
   minWanderDistance: 5
   maxWanderDistance: 10
   minWanderWaitTime: 1
@@ -113,6 +117,7 @@ MonoBehaviour:
   damageSound: {fileID: 0}
   deathSound: {fileID: 0}
   wanderSound: {fileID: 0}
+  fieldOfView: 120
 --- !u!195 &331527324797726159
 NavMeshAgent:
   m_ObjectHideFlags: 0
