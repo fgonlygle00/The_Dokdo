@@ -1,5 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -41,12 +45,13 @@ public class PlayerConditions : MonoBehaviour, IDamagable
 
     public UnityEvent onTakeDamage;
 
-    private bool isRunning = false;
-    public float runningStaminaDrainRate = 10f;
-
     private bool isFacingMonster = false;
-    private bool isAffectedByMonster = false;
 
+    public float lineSize = 16f;
+
+    public Volume vg;
+
+    public float vignetteIntensityIncrement = 0.1f;
 
     void Start()
     {
@@ -54,11 +59,39 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         stress.curValue = stress.startValue;
         hunger.curValue = hunger.startValue;
         stamina.curValue = stamina.startValue;
+
+        // StartCoroutine(UpdateVignetteIntensity());
     }
+
+    //IEnumerator UpdateVignetteIntensity()
+    //{
+    //    while (true)
+    //    {
+    //        if (isFacingMonster == true)
+    //        {
+    //            if (vg.profile.TryGet(out Vignette vignette))
+    //            {
+    //                vignette.intensity.value += vignetteIntensityIncrement;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (vg.profile.TryGet(out Vignette vignette))
+    //            {
+    //                vignette.intensity.value -= vignetteIntensityIncrement;
+    //            }
+    //        }
+
+    //        yield return null;
+    //        yield return new WaitForSeconds(vignetteIncreaseInterval);
+    //    }
+    //}
 
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(transform.position, transform.forward * lineSize, Color.yellow);
+
         hunger.Subtract(hunger.decayRate * Time.deltaTime);
 
         stress.Subtract(stress.decayRate * Time.deltaTime);
@@ -69,27 +102,39 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         if (health.curValue == 0.0f)
             Die();
 
-        if (!isRunning)
-            stamina.Add(stamina.regenRate * Time.deltaTime);
-
-        if (isAffectedByMonster)
+        if (isFacingMonster == false)
         {
-            // 시야가 좁아지고 속도가 감소하는 등의 상태 변화 적용
-            // 이 부분은 상황에 따라서 구현해야 합니다.
-            // fsm 에 스트레스상태넣고 stress 를 받을때 canvas 까만색 이미지
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, lineSize))
+            {
+                if (hit.collider.CompareTag("Monster"))
+                {
+                    if (vg.profile.TryGet(out Vignette vignette)) // for e.g set vignette intensity to .4f
+                    { 
+                        vignette.intensity.value += vignetteIntensityIncrement * Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    if (vg.profile.TryGet(out Vignette vignette)) // for e.g set vignette intensity to .4f
+                    {
+                        vignette.intensity.value -= vignetteIntensityIncrement * Time.deltaTime;
+                    }
+                }
+            }
         }
 
-        health.uiBar.fillAmount = health.GetPercentage();
-        stress.uiBar.fillAmount = stress.GetPercentage();
-        hunger.uiBar.fillAmount = hunger.GetPercentage();
-        stamina.uiBar.fillAmount = stamina.GetPercentage();
+        //health.uiBar.fillAmount = health.GetPercentage();
+        //stress.uiBar.fillAmount = stress.GetPercentage();
+        //hunger.uiBar.fillAmount = hunger.GetPercentage();
+        //stamina.uiBar.fillAmount = stamina.GetPercentage();
     }
 
     public void Heal(float amount)
     {
         health.Add(amount);
     }
-
+     
     public void Eat(float amount)
     {
         hunger.Add(amount);
@@ -97,11 +142,14 @@ public class PlayerConditions : MonoBehaviour, IDamagable
 
     public void getStress(float amount)
     {
-        // 몬스터를 바라볼 시, 스트레스 증가
-        // 시야 좁아짐
-        // 속도 줄어듦
-        // 받는 데미지 추가
+        stress.Add(amount);
+
+        if (vg.profile.TryGet(out Vignette vignette))
+        {
+            vignette.intensity.value += vignetteIntensityIncrement;
+        }
     }
+
 
     public bool UseStamina(float amount)
     {
@@ -114,7 +162,7 @@ public class PlayerConditions : MonoBehaviour, IDamagable
 
     public void Die()
     {
-        Debug.Log("플레이어가 죽었다.");
+        // Debug.Log("플레이어가 죽었다.");
     }
 
     public void TakePhysicalDamage(int damageAmount)
@@ -123,27 +171,8 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         onTakeDamage?.Invoke();
     }
 
-    public void StartRunning()
-    {
-        if (UseStamina(runningStaminaDrainRate * Time.deltaTime))
-        {
-            isRunning = true;
-        }
-    }
-
-    public void StopRunning()
-    {
-        isRunning = false;
-    }
-
     public void SetFacingMonster(bool value)
     {
         isFacingMonster = value;
-    }
-
-    // 외부에서 몬스터의 영향을 받는지 여부를 설정할 수 있는 메서드
-    public void SetAffectedByMonster(bool value)
-    {
-        isAffectedByMonster = value;
     }
 }

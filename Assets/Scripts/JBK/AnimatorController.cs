@@ -1,0 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AnimatorController : MonoBehaviour
+{
+    private Animator animator;
+    // Start is called before the first frame update
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float xInput = Input.GetAxis("Horizontal");
+        float zInput = Input.GetAxis("Vertical");
+
+        if (xInput != 0 || zInput != 0)
+        {
+            animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            animator.SetBool("IsRunning", true);
+        }
+
+        // 달리기 종료
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            animator.SetBool("IsRunning", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("Jumping");
+        }
+    }
+}

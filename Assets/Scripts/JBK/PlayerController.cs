@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
+    public float normalSpeed;
+    public float runSpeed;
     private Vector2 curMovementInput;
     public float jumpForce;
     public LayerMask groundLayerMask;
@@ -54,6 +56,10 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+            moveSpeed = runSpeed;
+        else
+            moveSpeed = normalSpeed;
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
         dir.y = _rigidbody.velocity.y;
