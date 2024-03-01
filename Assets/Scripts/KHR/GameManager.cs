@@ -1,35 +1,81 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // 게임 매니저의 싱글톤 인스턴스
+    public event Action GameOverEvent; // 게임매니저에서만 접근 가능하도록 만듦(이벤트를 이용해서, 함수를 이용해서 접근할 수 있도록 제작)
+    
     public static GameManager instance;
+
+    public GameObject PlayerObject; // 언제든지 게임메니저 인스턴스에 접근을 하면, 플레이어 오브젝트에 접근할 수 있도록 만듦
+    public PlayerManager playerManager; 
+    public GameObject gameOverUI;
+
+    private PlayerData playerData;
 
     private void Awake()
     {
-        // 싱글톤 패턴을 위한 코드
-        if (instance == null)
+        if (instance = null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
+        else // DontDestroyOnLoad(gameObject); 가 게임매니저가 두개 있을 경우에 파괴되어야 함 = 게임매니저가 하나만 존재하도록 하는 거
         {
-            Destroy(gameObject);
+            if (instance != this)
+            {
+                Destroy(gameObject);
+
+            }
         }
+
+    }
+    private void Start()
+    {
+        // 초기 플레이어 데이터 설정
+        playerData = new PlayerData(100, 0, 100, 100);
+        //playerManager.SetPlayerData(playerData);
+        GameOverEvent += GameOver; 
+        // 게임오버이벤트에 게임오버라는 함수를 구독! (게임오버가 되었을때 실행되야하는 것들을 게임오버이벤트에 다 구독시켜주세요 = 대입시켜주세요)
     }
 
-    // 게임이 시작될 때 호출되는 메소드
-    public void StartGame()
+    private void Update()
     {
-        Debug.Log("게임이 시작되었습니다.");
-        // 게임 시작에 필요한 추가적인 로직을 여기에 작성하세요.
+        // 플레이어 데이터 갱신
+        //playerData = playerManager.GetPlayerData();
+
+        // 게임 플로우 제어
+        ControlGameFlow();
     }
 
-    // 게임이 끝날 때 호출되는 메소드
-    public void EndGame()
+    public void CallGameOverEvent()
     {
-        Debug.Log("게임이 종료되었습니다.");
-        // 게임 종료에 필요한 추가적인 로직을 여기에 작성하세요.
+        GameOverEvent?.Invoke(); // ? = null 이면 실행 x , 이벤트에 아무것도 등록되어있지 않으면 실행x
+    }
+
+    private void ControlGameFlow()
+    {
+        // 체력 0 이하면 게임오버
+        if (playerData.playerHealth <= 0)
+            GameOver();
+    }
+
+    private void GameOver()
+    {
+        GameManager.instance.GameOver();
+        // 게임오버 UI 활성화
+        gameOverUI.SetActive(true);
+
+        // 플레이어 조작 불가
+        //playerManager.controller.enabled = false;
+
+        // 게임 시간 정지
+        Time.timeScale = 0f;
+
+        // 사운드 재생 등
+
+        // 플레이어 친구에게 플레이어의 hp <=0 일 경우에, 해당 CallGameOverEvent 함수 실행시킬 수 있도록 넣어주세요 (디렉 넣기)
+        
     }
 }
+

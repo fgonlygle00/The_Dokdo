@@ -2,18 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveAndLoadManager : MonoBehaviour
+public class DataManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-   // 어떤 데이터를 저장할건지에 대해서 
-   //게임 오버 조건 클리어 조건 
-   // 클리어 조건 : 2가지 
-   // 1. 섬에서 생존하기 (카운트)
-   // 2. 섬에 있는 좀비를 다 물리친 경우
-   // 3.
+    public PlayerManager playerManager;
 
-    // Update is called once per frame
-    
-    // 오버조건
-    // Player Hp < 0
+    // 몬스터 MonsterDataSO를 불러옴(호출)
+    public MonsterDataSO monsterData;
+
+    private void Awake()
+    {
+        // Resources 폴더에서 MonsterDataSO 로드
+        monsterData = Resources.Load<MonsterDataSO>("MonsterData");
+    }
+
+    public void SaveGame()
+    {
+        //// 기존 게임 저장 코드 
+        //PlayerData data = playerManager.GetPlayerData();
+
+        //// 파일 시스템이나 데이터베이스에 저장
+        //SavePlayerDataToFile(data);
+    }
+
+    public void LoadGame()
+    {
+        //기존 게임 로드 코드
+        // 파일이나 데이터베이스에서 로드
+        //PlayerData data = LoadPlayerDataFromFile();
+
+        //// 플레이어 매니저로 복구
+        //playerManager.LoadPlayerData(data);
+    }
+
+    public int GetMonsterHealth()
+    {
+        // MonsterDataSO에서 체력 반환
+        return monsterData.health;
+    }
+
 }
+
+
