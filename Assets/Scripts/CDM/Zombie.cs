@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Zombie : MonoBehaviour
 {
-	public MonsterDataSO data;
+	public float health;
 
 	// 몬스터의 현재 상태
 	public AIState State;
@@ -148,8 +148,8 @@ public class Zombie : MonoBehaviour
 	// NPC가 받은 손상 처리
 	public void TakePhysicalDamage(int damageAmount)
 	{
-		data.health -= damageAmount;
-		if (data.health <= 0)
+		health -= damageAmount;
+		if (health <= 0)
 			Die();
 
 		// 손상 받았을 때의 플래시 효과
@@ -212,5 +212,11 @@ public class Zombie : MonoBehaviour
 			Gizmos.DrawWireSphere(transform.position, attackDistance);
 		}
 	}
+
+	public MonsterData GetState()
+	{
+		return new MonsterData(transform.position, transform.rotation, health);
+	}
+
 
 }

@@ -1208,6 +1208,7 @@ GameObject:
   - component: {fileID: 1734409117396152445}
   - component: {fileID: 7031958892381428712}
   - component: {fileID: 516630091880732547}
+  - component: {fileID: 5057250148126217393}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Untagged
@@ -1229,7 +1230,7 @@ Transform:
   m_Children:
   - {fileID: 6768834736516766191}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!195 &7031958892381428712
 NavMeshAgent:
@@ -1265,9 +1266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd2c6ac9bf3e7547abd9046dd31b891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 58e56452d2bb9e4409e8260cef29dd70, type: 2}
   walkSpeed: 1
   runSpeed: 4
+  health: 100
   dropOnDeath: []
   detectDistance: 5
   safeDistance: 8
@@ -1284,3 +1285,24 @@ MonoBehaviour:
   damageSound: {fileID: 0}
   deathSound: {fileID: 0}
   wanderSound: {fileID: 0}
+--- !u!65 &5057250148126217393
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8420791638466906713}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.9657211, z: 3.4238892}
+  m_Center: {x: 0, y: 0.8170662, z: -1.8642883}

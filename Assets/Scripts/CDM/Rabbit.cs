@@ -6,11 +6,10 @@ using UnityEngine.AI;
 
 public class Rabbit : MonoBehaviour
 {
-	public MonsterDataSO data;
-
 	[Header("Stats")]
 	public float walkSpeed;
 	public float runSpeed;
+	public float health;
 	public ItemData[] dropOnDeath;
 
 	[Header("AI")]
@@ -192,8 +191,8 @@ public class Rabbit : MonoBehaviour
 	// NPC가 받은 손상 처리
 	public void TakePhysicalDamage(int damageAmount)
 	{
-		data.health -= damageAmount;
-		if (data.health <= 0)
+		health -= damageAmount;
+		if (health <= 0)
 			Die();
 
 		// 손상 받았을 때의 플래시 효과
@@ -228,4 +227,10 @@ public class Rabbit : MonoBehaviour
 		for (int x = 0; x < meshRenderers.Length; x++)
 			meshRenderers[x].material.color = Color.white;
 	}
+
+	public MonsterData GetState()
+	{
+		return new MonsterData(transform.position, transform.rotation, health);
+	}
+
 }
