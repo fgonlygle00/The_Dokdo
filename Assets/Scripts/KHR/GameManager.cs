@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class GameManager : MonoBehaviour
 {
     public event Action GameOverEvent; // 게임매니저에서만 접근 가능하도록 만듦(이벤트를 이용해서, 함수를 이용해서 접근할 수 있도록 제작)
-    
     public static GameManager instance;
-
+    public GameObject SaveButtonObject; // 최종적으로는 지우기
     public GameObject PlayerObject; // 언제든지 게임메니저 인스턴스에 접근을 하면, 플레이어 오브젝트에 접근할 수 있도록 만듦
     public PlayerManager playerManager; 
     public GameObject gameOverUI;
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance = null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -46,7 +47,19 @@ public class GameManager : MonoBehaviour
 
         // 게임 플로우 제어
         ControlGameFlow();
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            //esc 버튼이 눌렸을때 실행
+            
+            SaveButtonObject.SetActive(true);
+            PlayerObject.GetComponent<PlayerController>().ToggleCursor(true);
+
+            Debug.Log("ESC 버튼이 눌렸습니다!");
+
+        }
     }
+
+
 
     public void CallGameOverEvent()
     {
@@ -70,7 +83,7 @@ public class GameManager : MonoBehaviour
         //playerManager.controller.enabled = false;
 
         // 게임 시간 정지
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; 
 
         // 사운드 재생 등
 

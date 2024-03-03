@@ -5,7 +5,7 @@ public class DayNightCycle : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float time;
     public float fullDayLength;
-    public float startTime = 0.4f;
+    public float startTime = 0.4f; 
     private float timeRate;
     public Vector3 noon;
 
@@ -29,6 +29,8 @@ public class DayNightCycle : MonoBehaviour
         time = startTime;
     }
 
+    // 데이터 덮어씌우는 시점 
+
     private void Update()
     {
         time = (time + timeRate * Time.deltaTime) % 1.0f;
@@ -37,6 +39,7 @@ public class DayNightCycle : MonoBehaviour
 
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
+  
     }
 
     void UpdateLighting(Light lightSource, Gradient colorCradiant, AnimationCurve intensityCurve)
