@@ -9,8 +9,18 @@ public class OptionUI : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            OptionWindow.SetActive(true);
+            OpenWindow();
         }
+    }
+
+    private void OpenWindow()
+    {
+        OptionWindow.SetActive(true);
+        if (OptionWindow.activeInHierarchy)
+        {
+            PlayerController.instance.ToggleCursor(true);
+        }
+        else PlayerController.instance.ToggleCursor(true);
     }
 
     // Ã¢ ´Ý±â

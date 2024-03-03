@@ -58,7 +58,7 @@ public class Bear : MonoBehaviour, IDamagable
 	private void Update()
 	{
 		// 플레이어와의 거리 계산 
-		playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
+		//playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
 		if (playerDistance < safeDistance)
 		{
@@ -70,7 +70,7 @@ public class Bear : MonoBehaviour, IDamagable
 		}
 
 		// 이동에 따른 애니메이터 업데이트
-		animator.SetBool("Moving", aiState != AIState.Idle);
+		//animator.SetBool("Moving", aiState != AIState.Idle);
 
 		// 현재 AI 상태에 따른 행동 처리
 		switch (aiState)
@@ -119,8 +119,8 @@ public class Bear : MonoBehaviour, IDamagable
 				// 마지막 공격 이후 충분한 시간이 경과했으면 공격 실행
 				lastAttackTime = Time.time;	// 마지막 공격 시간을 현재로 업데이트
 				PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(damage);  // 플레이어에게 물리적 피해를 주는 코드
-				animator.speed = 1;		// 애니메이션 속도를 정상으로 설정
-				animator.SetTrigger("Attack");		// 공격 애니메이션 트리거
+				//animator.speed = 1;		// 애니메이션 속도를 정상으로 설정
+				//animator.SetTrigger("Attack");		// 공격 애니메이션 트리거
 				// 공격 사운드 재생
 				// audioSource.PlayOneShot(attackSound);
 			}
@@ -194,7 +194,7 @@ public class Bear : MonoBehaviour, IDamagable
 
 		// 아래의 코드는 애니메이션 속도를 NavMeshAgent의 이동 속도에 맞춰 조정합니다.
 		// 이는 캐릭터의 이동 속도가 걷기 속도로 변경될 때 애니메이션 속도도 그에 맞춰 조정되도록 합니다.
-		animator.speed = agent.speed / walkSpeed;       // 이동 속도에 따른 애니메이션 속도 조정
+		//animator.speed = agent.speed / walkSpeed;       // 이동 속도에 따른 애니메이션 속도 조정
 	}
 
 	// 새로운 위치로 배회 시작
