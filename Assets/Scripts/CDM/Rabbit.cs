@@ -14,7 +14,7 @@ public class Rabbit : MonoBehaviour
 
 	[Header("AI")]
 
-	private AIState aiState;
+	public AIState aiState;
 	public float detectDistance;
 	public float safeDistance;            
 
@@ -125,7 +125,7 @@ public class Rabbit : MonoBehaviour
 				break;
 		}
 
-		// animator.speed = agent.speed / walkSpeed;		// 이동 속도에 따른 애니메이션 속도 조정
+		animator.speed = agent.speed / walkSpeed;		// 이동 속도에 따른 애니메이션 속도 조정
 	}
 
 	// 새로운 위치로 배회 시작
