@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 219511461595308236}
   - component: {fileID: 7081166054480176090}
-  - component: {fileID: 8272188860124632126}
+  - component: {fileID: 4337753580363336630}
   - component: {fileID: 6712762338288114278}
   m_Layer: 7
   m_Name: Item_Axe
@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3724006165273899622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1740.714, y: 69.628, z: 750.74}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4299290689913331056}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7081166054480176090
 Rigidbody:
@@ -62,8 +62,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &8272188860124632126
-BoxCollider:
+--- !u!64 &4337753580363336630
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -80,9 +80,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.74, y: 0.1, z: 0.22}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 9f1810da5391ad942b0710778d90f7d2, type: 3}
 --- !u!114 &6712762338288114278
 MonoBehaviour:
   m_ObjectHideFlags: 0

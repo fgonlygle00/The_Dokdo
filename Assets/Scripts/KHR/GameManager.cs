@@ -46,17 +46,17 @@ public class GameManager : MonoBehaviour
         //playerData = playerManager.GetPlayerData();
 
         // 게임 플로우 제어
-        ControlGameFlow();
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            //esc 버튼이 눌렸을때 실행
+        //ControlGameFlow();
+        //if(Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    //esc 버튼이 눌렸을때 실행
             
-            SaveButtonObject.SetActive(true);
-            PlayerObject.GetComponent<PlayerController>().ToggleCursor(true);
+        //    SaveButtonObject.SetActive(true);
+        //    PlayerObject.GetComponent<PlayerController>().ToggleCursor(true);
 
-            Debug.Log("ESC 버튼이 눌렸습니다!");
+        //    Debug.Log("ESC 버튼이 눌렸습니다!");
 
-        }
+        //}
     }
 
 

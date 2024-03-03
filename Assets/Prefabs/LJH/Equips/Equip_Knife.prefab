@@ -25,15 +25,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340889481361774424}
-  m_LocalRotation: {x: -0.3077254, y: -0.6326722, z: 0.22845417, w: 0.6729337}
-  m_LocalPosition: {x: 0.3, y: -0.065, z: 0.3745}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalRotation: {x: 0.3559959, y: -0.44009835, z: 0.45172337, w: 0.6895842}
+  m_LocalPosition: {x: 0.1078, y: 0.0042, z: 0.0798}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7150170943035541857}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -7.186, y: -89.419, z: 44.617}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 62.696, y: -38.466, z: 42.458}
 --- !u!114 &7483968709664267170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +128,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 4K_Knife_Polymer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6347800078495885255, guid: e6f977f95f61db940ac13170b9646a2d, type: 3}
+    - {fileID: 6347800078495860777, guid: e6f977f95f61db940ac13170b9646a2d, type: 3}
+    - {fileID: 5247970336784614361, guid: e6f977f95f61db940ac13170b9646a2d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

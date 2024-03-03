@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6667385720431592689}
   - component: {fileID: 2374516057495404589}
-  - component: {fileID: 4508799177585715863}
+  - component: {fileID: 3954295162928443608}
   - component: {fileID: 2035664796779072373}
   m_Layer: 7
   m_Name: Item_Knife
@@ -111,13 +111,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6225993599014938017}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1738.3569, y: 68.61, z: 753.1981}
-  m_LocalScale: {x: 6, y: 6, z: 6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.6, y: 3.6, z: 3.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6511678642810990737}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2374516057495404589
 Rigidbody:
@@ -146,8 +146,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &4508799177585715863
-BoxCollider:
+--- !u!64 &3954295162928443608
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -164,9 +164,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.36, y: 0.06, z: 0.19}
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7958818948253507542, guid: 288e24e27fc60a64faad2df7490636f5, type: 3}
 --- !u!114 &2035664796779072373
 MonoBehaviour:
   m_ObjectHideFlags: 0
