@@ -10,6 +10,7 @@ public class EquipManager : MonoBehaviour
 
     private PlayerController controller;
     private PlayerConditions conditions;
+    private Animator animator;
 
     // singleton
     public static EquipManager instance;
@@ -19,13 +20,14 @@ public class EquipManager : MonoBehaviour
         instance = this;
         controller = GetComponent<PlayerController>();
         conditions = GetComponent<PlayerConditions>();
+        animator = GetComponent<Animator>();
     }
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed && curEquip != null && controller.canLook)
         {
-            curEquip.OnAttackInput();
+            animator.SetTrigger("Attacking");
         }
     }
 
@@ -42,5 +44,10 @@ public class EquipManager : MonoBehaviour
             Destroy(curEquip.gameObject);
             curEquip = null;
         }
+    }
+
+    public void OnHit()
+    {
+        curEquip.OnHit();
     }
 }
