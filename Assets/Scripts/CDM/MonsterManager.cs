@@ -6,24 +6,17 @@ public class MonsterManager : MonoBehaviour
 	public GameObject rabbitPrefab;
 	public GameObject bearPrefab;
 
-	public int maxRabbits = 50;
-	public int maxBears = 20;
+	public int maxRabbits = 300; // 원하는 토끼의 최대 수
+	public int maxBears = 100; // 원하는 베어의 최대 수
 
-	public float rabbitXMin = 1597f;
-	public float rabbitXMax = 1942f;
-	public float rabbitZMin = 432f;
-	public float rabbitZMax = 727f;
-
-	public float bearXMin = 1950f;
-	public float bearXMax = 2100f;
-	public float bearZMin = 977f;
-	public float bearZMax = 1390f;
-
-	public float rabbitSpawnInterval = 3f;
-	public float bearSpawnInterval = 5f;
+	public float rabbitSpawnInterval = 3f; // 토끼 소환 간격
+	public float bearSpawnInterval = 5f; // 베어 소환 간격
 
 	private int currentRabbitCount = 0;
 	private int currentBearCount = 0;
+
+	public Vector3 minimumBoundary; // 배치할 최소 경계
+	public Vector3 maximumBoundary; // 배치할 최대 경계
 
 	void Start()
 	{
@@ -35,9 +28,7 @@ public class MonsterManager : MonoBehaviour
 	{
 		while (currentRabbitCount < maxRabbits)
 		{
-			Vector3 spawnPosition = GenerateRabbitSpawnPosition();
-			SpawnAnimal(rabbitPrefab, spawnPosition);
-			currentRabbitCount++;
+			SpawnAnimal(rabbitPrefab);
 			yield return new WaitForSeconds(rabbitSpawnInterval);
 		}
 	}
@@ -46,31 +37,25 @@ public class MonsterManager : MonoBehaviour
 	{
 		while (currentBearCount < maxBears)
 		{
-			Vector3 spawnPosition = GenerateBearSpawnPosition();
-			SpawnAnimal(bearPrefab, spawnPosition);
-			currentBearCount++;
+			SpawnAnimal(bearPrefab);
 			yield return new WaitForSeconds(bearSpawnInterval);
 		}
 	}
 
-	private void SpawnAnimal(GameObject animalPrefab, Vector3 spawnPosition)
+	private void SpawnAnimal(GameObject animalPrefab)
 	{
-		Instantiate(animalPrefab, spawnPosition, Quaternion.identity);
+		Vector3 randomPosition = GetRandomPosition();
+		Instantiate(animalPrefab, randomPosition, Quaternion.identity);
+		if (animalPrefab == rabbitPrefab) currentRabbitCount++;
+		else if (animalPrefab == bearPrefab) currentBearCount++;
 	}
 
-	private Vector3 GenerateRabbitSpawnPosition()
+	// 맵의 경계 내에서 랜덤 위치를 반환합니다.
+	private Vector3 GetRandomPosition()
 	{
-		float x = Random.Range(rabbitXMin, rabbitXMax);
-		float z = Random.Range(rabbitZMin, rabbitZMax);
-		float y = Terrain.activeTerrain.SampleHeight(new Vector3(x, 0, z)) + Terrain.activeTerrain.GetPosition().y;
-		return new Vector3(x, y, z);
-	}
-
-	private Vector3 GenerateBearSpawnPosition()
-	{
-		float x = Random.Range(bearXMin, bearXMax);
-		float z = Random.Range(bearZMin, bearZMax);
-		float y = Terrain.activeTerrain.SampleHeight(new Vector3(x, 0, z)) + Terrain.activeTerrain.GetPosition().y;
+		float x = Random.Range(minimumBoundary.x, maximumBoundary.x);
+		float y = Random.Range(minimumBoundary.y, maximumBoundary.y);
+		float z = Random.Range(minimumBoundary.z, maximumBoundary.z);
 		return new Vector3(x, y, z);
 	}
 }
