@@ -55,6 +55,14 @@ public class DataManager : MonoBehaviour
     //    return monsterData.health;
     //}
 
+<<<<<<< Updated upstream
+=======
+    //public int GetMonsterHealth()
+    //{
+    //    // MonsterDataSO에서 체력 반환
+    //    //return monsterData.health;
+    //}
+>>>>>>> Stashed changes
 
 }
 
