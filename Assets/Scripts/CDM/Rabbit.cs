@@ -24,12 +24,6 @@ public class Rabbit : MonoBehaviour
 	public float minWanderWaitTime;     // 배회 전 최소 대기 시간
 	public float maxWanderWaitTime;     // 배회 전 최대 대기 시간
 
-	[Header("Sound")]
-	public AudioSource audioSource;		// AudioSource 컴포넌트 참조를 위한 변수
-	public AudioClip damageSound;		// 피해 받았을 때 사운드 클립
-	public AudioClip deathSound;		// 사망 사운드 클립
-	public AudioClip wanderSound;		// 배회 사운드 클립
-
 	private float playerDistance;       // NPC와 플레이어 사이의 거리
 
 	public float fieldOfView = 120f;
@@ -230,7 +224,9 @@ public class Rabbit : MonoBehaviour
 
 	public MonsterData GetState()
 	{
-		return new MonsterData(transform.position, transform.rotation, health);
+		int uniqueID = 3;
+		string monsterType = "Rabbit";
+		return new MonsterData(uniqueID, monsterType, transform.position, transform.rotation, health);
 	}
 
 }

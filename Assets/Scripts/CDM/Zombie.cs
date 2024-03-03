@@ -215,7 +215,9 @@ public class Zombie : MonoBehaviour
 
 	public MonsterData GetState()
 	{
-		return new MonsterData(transform.position, transform.rotation, health);
+		int uniqueID = 2;
+		string monsterType = "Zombie";
+		return new MonsterData(uniqueID, monsterType, transform.position, transform.rotation, health);
 	}
 
 
