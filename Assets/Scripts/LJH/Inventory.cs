@@ -87,7 +87,7 @@ public class Inventory : MonoBehaviour
             onOpenInventory?.Invoke();
             controller.ToggleCursor(true);
         }
-    }
+    } 
 
     public bool IsOpen()
     {
