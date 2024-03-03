@@ -3,11 +3,10 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Native : MonoBehaviour
 {
-	public MonsterDataSO data;
-
 	// 몬스터의 현재 상태
 	public AIState State;
 	public ItemData[] dropOnDeath;
+	public float health;
 
 	// 추적 사정거리
 	public float traceDistance = 10.0f;
@@ -138,8 +137,8 @@ public class Native : MonoBehaviour
 	// NPC가 받은 손상 처리
 	public void TakePhysicalDamage(int damageAmount)
 	{
-		data.health -= damageAmount;
-		if (data.health <= 0)
+		health -= damageAmount;
+		if (health <= 0)
 			Die();
 
 		// 손상 받았을 때의 플래시 효과
@@ -203,4 +202,8 @@ public class Native : MonoBehaviour
 		}
 	}
 
+	public MonsterData GetState()
+	{
+		return new MonsterData(transform.position, transform.rotation, health);
+	}
 }
