@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 64000011015796732}
   - component: {fileID: -4279493537897522679}
   - component: {fileID: 357719733939142325}
+  - component: {fileID: -8644954350331842009}
   m_Layer: 0
   m_Name: RHEF_SpruceTerrainB
   m_TagString: Untagged
@@ -140,3 +141,19 @@ MonoBehaviour:
   itemToGive: {fileID: 11400000, guid: 5a32c299556e16c4892bc2196ae5e9a6, type: 2}
   quantityPerHit: 1
   capacity: 10
+--- !u!114 &-8644954350331842009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010819948620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352dbb7d5505f854e85df4dd3cda341e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Apple: {fileID: 11400000, guid: 79761ca5365993f42b61e7f6faed976d, type: 2}
+  HowManyPerHit: 1
+  quantity: 1
+  dropRate: 1

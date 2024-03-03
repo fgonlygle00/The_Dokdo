@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Resource : MonoBehaviour
 {
-    public ItemData itemToGive; // 피격당했을 때 아이템 줌
+    public ItemData itemToGive; // 피격당했을 때 아이템
     public int quantityPerHit = 1;
     public int capacity;
 

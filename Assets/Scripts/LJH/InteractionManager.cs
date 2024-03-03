@@ -38,7 +38,12 @@ public class InteractionManager : MonoBehaviour
         {
             lastCheckTime = Time.time;
 
-            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+            Vector3 rayOrigin = camera.transform.position;
+
+            // 예를 들어, 카메라의 전방으로 레이를 쏩니다.
+            Vector3 rayDirection = camera.transform.forward;
+
+            Ray ray = new Ray(rayOrigin, rayDirection);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
