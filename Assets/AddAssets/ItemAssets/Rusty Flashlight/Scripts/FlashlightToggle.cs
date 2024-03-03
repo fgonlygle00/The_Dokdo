@@ -6,7 +6,7 @@ using UnityEngine.Experimental.GlobalIllumination;
 public class FlashlightToggle : MonoBehaviour
 {
     public GameObject lightGO; //light gameObject to work with
-    private bool isOn = false; //is flashlight on or off?
+    private bool isOn = true; //is flashlight on or off?
 
     // Use this for initialization
     void Start()

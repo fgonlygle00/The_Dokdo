@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23000013556042206}
   - component: {fileID: 64000013174159900}
   - component: {fileID: -6569542106002656473}
+  - component: {fileID: -1322038304337641354}
   m_Layer: 0
   m_Name: RHEF_RockMediumA
   m_TagString: Untagged
@@ -123,3 +124,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.23500001, y: 1.08, z: 0.28100002}
   m_TimeToStationary: 0.5
+--- !u!114 &-1322038304337641354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013218097322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01dccd4eac660242a9d82c5cbaaf66b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToGive: {fileID: 11400000, guid: f427b330c04de9a4e8a1afffbc2c7f53, type: 2}
+  quantityPerHit: 1
+  capacity: 7
