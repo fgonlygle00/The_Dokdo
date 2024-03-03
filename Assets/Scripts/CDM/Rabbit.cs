@@ -54,7 +54,7 @@ public class Rabbit : MonoBehaviour
 	private void Update()
 	{
 		// 플레이어와의 거리 계산 
-		playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
+		//playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
 		if (playerDistance < safeDistance) 
 		{

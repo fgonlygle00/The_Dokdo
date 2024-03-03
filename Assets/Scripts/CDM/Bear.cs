@@ -58,7 +58,7 @@ public class Bear : MonoBehaviour, IDamagable
 	private void Update()
 	{
 		// 플레이어와의 거리 계산 
-		playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
+		//playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
 		if (playerDistance < safeDistance)
 		{
@@ -119,8 +119,8 @@ public class Bear : MonoBehaviour, IDamagable
 				// 마지막 공격 이후 충분한 시간이 경과했으면 공격 실행
 				lastAttackTime = Time.time;	// 마지막 공격 시간을 현재로 업데이트
 				PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(damage);  // 플레이어에게 물리적 피해를 주는 코드
-				animator.speed = 1;		// 애니메이션 속도를 정상으로 설정
-				animator.SetTrigger("Attack");		// 공격 애니메이션 트리거
+				//animator.speed = 1;		// 애니메이션 속도를 정상으로 설정
+				//animator.SetTrigger("Attack");		// 공격 애니메이션 트리거
 				// 공격 사운드 재생
 				// audioSource.PlayOneShot(attackSound);
 			}
