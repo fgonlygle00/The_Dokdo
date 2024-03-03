@@ -7,12 +7,12 @@ public class DataManager : MonoBehaviour
     public PlayerManager playerManager;
     public DayNightCycle dayNightCycle;  // 추가된 속성
     // 몬스터 MonsterDataSO를 불러옴(호출)
-    public MonsterDataSO monsterData;
+    //public MonsterDataSO monsterData;
 
     private void Awake()
     {
         // Resources 폴더에서 MonsterDataSO 로드
-        monsterData = Resources.Load<MonsterDataSO>("MonsterData");
+        //monsterData = Resources.Load<MonsterDataSO>("MonsterData");
     }
 
 
@@ -49,12 +49,12 @@ public class DataManager : MonoBehaviour
         Debug.Log("세이브버튼클릭");
 
     }
+    //public int GetMonsterHealth()
+    //{
+    //    // MonsterDataSO에서 체력 반환
+    //    return monsterData.health;
+    //}
 
-    public int GetMonsterHealth()
-    {
-        // MonsterDataSO에서 체력 반환
-        return monsterData.health;
-    }
 
 }
 
