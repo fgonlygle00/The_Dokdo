@@ -5,7 +5,7 @@ public class DayNightCycle : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float time;
     public float fullDayLength;
-    public float startTime = 0.4f;
+    public float startTime = 0.4f; 
     private float timeRate;
     public Vector3 noon;
 
@@ -41,6 +41,8 @@ public class DayNightCycle : MonoBehaviour
         time = startTime;
     }
 
+    // ë°ì´í„° ë®ì–´ì”Œìš°ëŠ” ì‹œì  
+
     private void Update()
     {
         time = (time + timeRate * Time.deltaTime) % 1.0f;
@@ -49,12 +51,13 @@ public class DayNightCycle : MonoBehaviour
 
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
+        
+        float t = (Mathf.Cos(time * Mathf.PI * 2) + 1) * 0.5f; // timeì„ ì‚¬ìš©í•˜ì—¬ t ê°’ ê³„ì‚°
+        skyboxMaterial.SetColor("_Tint", Color.Lerp(dayColor, nightColor, t)); // t ê°’ì— ë”°ë¼ ìƒ‰ìƒ ë³´ê°„
+        waterMaterial.SetColor("_Color", Color.Lerp(dayWaterColor, nightWaterColor, t)); // t ê°’ì— ë”°ë¼ ìƒ‰ìƒ ë³´ê°„
 
-        float t = (Mathf.Cos(time * Mathf.PI * 2) + 1) * 0.5f; // timeÀ» »ç¿ëÇÏ¿© t °ª °è»ê
-        skyboxMaterial.SetColor("_Tint", Color.Lerp(dayColor, nightColor, t)); // t °ª¿¡ µû¶ó »ö»ó º¸°£
-        waterMaterial.SetColor("_Color", Color.Lerp(dayWaterColor, nightWaterColor, t)); // t °ª¿¡ µû¶ó »ö»ó º¸°£
+        RenderSettings.fogColor = Color.Lerp(dayFogColor, nightFogColor, t); // ë°¤ê³¼ ë‚®ì˜ fog ìƒ‰ìƒë„ ë³´ê°„
 
-        RenderSettings.fogColor = Color.Lerp(dayFogColor, nightFogColor, t); // ¹ã°ú ³·ÀÇ fog »ö»óµµ º¸°£
     }
 
     void UpdateLighting(Light lightSource, Gradient colorCradiant, AnimationCurve intensityCurve)
