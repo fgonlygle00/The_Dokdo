@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6652741736122741584}
   - component: {fileID: 447632246541043952}
-  - component: {fileID: 8759732354863908680}
+  - component: {fileID: 219598816130408299}
   - component: {fileID: 6163753908398815661}
   m_Layer: 7
   m_Name: Item_Banana
@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4133789201196213408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1736.3, y: 72.85, z: 744.47906}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4733165221347095225}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &447632246541043952
 Rigidbody:
@@ -62,8 +62,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &8759732354863908680
-BoxCollider:
+--- !u!64 &219598816130408299
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -80,9 +80,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6.94, y: 9.51, z: 3.08}
-  m_Center: {x: 1.62, y: 0, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2534964839176971238, guid: a18d1d4ae63c9f44eb21c4221803a2eb, type: 3}
 --- !u!114 &6163753908398815661
 MonoBehaviour:
   m_ObjectHideFlags: 0

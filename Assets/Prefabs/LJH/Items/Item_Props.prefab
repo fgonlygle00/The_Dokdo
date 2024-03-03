@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5354070274897897385}
   - component: {fileID: 8845509615756059844}
-  - component: {fileID: 7714197661029493045}
+  - component: {fileID: 7753939968750498876}
   - component: {fileID: 508488275908661427}
   m_Layer: 7
   m_Name: Item_Props
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 1029780285601607694}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8845509615756059844
 Rigidbody:
@@ -62,8 +62,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &7714197661029493045
-BoxCollider:
+--- !u!64 &7753939968750498876
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -80,9 +80,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5, y: 4, z: 0.45}
-  m_Center: {x: -0.05, y: 0.06, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 59c7451ed4e8f9b4d873adf10daa7b2b, type: 3}
 --- !u!114 &508488275908661427
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7925399990488310438}
   - component: {fileID: 3684117940878359550}
-  - component: {fileID: 8876308526388761106}
+  - component: {fileID: 4182856565805523611}
   - component: {fileID: 475717762617317877}
   m_Layer: 7
   m_Name: Item_Meat
@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4008107293635126079}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1735.923, y: 72.607, z: 744.589}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5367912478372131636}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3684117940878359550
 Rigidbody:
@@ -62,8 +62,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &8876308526388761106
-BoxCollider:
+--- !u!64 &4182856565805523611
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -80,9 +80,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.77, y: 2, z: 6.78}
-  m_Center: {x: 0, y: 0.53, z: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -462981019419857548, guid: f7c446adb5ac5524ab09a0a8df69c20b, type: 3}
 --- !u!114 &475717762617317877
 MonoBehaviour:
   m_ObjectHideFlags: 0
