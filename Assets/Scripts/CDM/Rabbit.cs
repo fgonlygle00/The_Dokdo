@@ -36,19 +36,20 @@ public class Rabbit : MonoBehaviour
 	{
 		agent = GetComponent<NavMeshAgent>();
 		animator = GetComponentInChildren<Animator>();
-		// audioSource = GetComponent<AudioSource>();			// AudioSource 컴포넌트 가져오기
 		meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 	}
 
 	private void Start()
 	{
 		SetState(AIState.Wandering);        // 초기 AI 상태를 배회로 설정
+		MonsterData myData = GetState();
+		MonsterDataManager.Instance.RegisterMonster(myData);
 	}
 
 	private void Update()
 	{
 		// 플레이어와의 거리 계산 
-		//playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
+		playerDistance = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
 		if (playerDistance < safeDistance) 
 		{
@@ -59,7 +60,7 @@ public class Rabbit : MonoBehaviour
 			SetState(AIState.Wandering);
 		}
 		// 이동에 따른 애니메이터 업데이트
-		//animator.SetBool("Moving", aiState != AIState.Idle);
+		animator.SetBool("Moving", aiState != AIState.Idle);
 
 		// 현재 AI 상태에 따른 행동 처리
 
@@ -220,6 +221,12 @@ public class Rabbit : MonoBehaviour
 		yield return new WaitForSeconds(0.1f);
 		for (int x = 0; x < meshRenderers.Length; x++)
 			meshRenderers[x].material.color = Color.white;
+	}
+
+	void OnDestroy()
+	{
+		MonsterData myData = GetState();
+		MonsterDataManager.Instance.UnregisterMonster(myData);
 	}
 
 	public MonsterData GetState()

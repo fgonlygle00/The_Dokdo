@@ -9,7 +9,6 @@ public class Zombie : MonoBehaviour
 	public AIState State;
 	public ItemData[] dropOnDeath;
 
-
 	// 추적 사정거리
 	public float traceDistance = 10.0f;
 	// 공격 사정거리
@@ -18,13 +17,6 @@ public class Zombie : MonoBehaviour
 	public float wanderDistance = 20.0f;
 	// 몬스터의 사망 여부
 	public bool isDie = false;
-
-	[Header("Sound")]
-	public AudioSource audioSource; // AudioSource 컴포넌트 참조를 위한 변수
-	public AudioClip attackSound; // 공격 사운드 클립
-	public AudioClip damageSound; // 피해 받았을 때 사운드 클립
-	public AudioClip deathSound; // 사망 사운드 클립
-	public AudioClip wanderSound; // 배회 사운드 클립
 
 	// Animoater 파라미터의 해시값 추출
 	private readonly int hashTrace = Animator.StringToHash("IsTrace");
@@ -36,7 +28,6 @@ public class Zombie : MonoBehaviour
 	private NavMeshAgent agent;
 	private Animator anim;
 	private SkinnedMeshRenderer[] meshRenderers;        // 플래시 효과를 위한 SinnedMeshRenderer 컴포넌트에 대한 참조들
-
 
 	private void Start()
 	{
@@ -50,8 +41,10 @@ public class Zombie : MonoBehaviour
 
 		// 몬스터의 상태를 체크하는 코루틴 함수 호출
 		StartCoroutine(CheckMonsterState());
-		// 상태에 따라 몬스터의 행동을 수행하는 코루팀 함수 호출
+		// 상태에 따라 몬스터의 행동을 수행하는 코루틴 함수 호출
 		StartCoroutine(MonsterAction());
+		MonsterData myData = GetState();
+		MonsterDataManager.Instance.RegisterMonster(myData);
 	}
 
 	// 일정한 간격으로 몬스터의 행동 상태를 체크
@@ -212,7 +205,11 @@ public class Zombie : MonoBehaviour
 			Gizmos.DrawWireSphere(transform.position, attackDistance);
 		}
 	}
-
+	void OnDestroy()
+	{
+		MonsterData myData = GetState();
+		MonsterDataManager.Instance.UnregisterMonster(myData);
+	}
 	public MonsterData GetState()
 	{
 		int uniqueID = 2;

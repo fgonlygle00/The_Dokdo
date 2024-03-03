@@ -42,7 +42,9 @@ public class Native : MonoBehaviour
 		// 몬스터의 상태를 체크하는 코루틴 함수 호출
 		StartCoroutine(CheckMonsterState());
 		// 상태에 따라 몬스터의 행동을 수행하는 코루팀 함수 호출
-		//StartCoroutine(MonsterAction());
+		StartCoroutine(MonsterAction());
+		MonsterData myData = GetState();
+		MonsterDataManager.Instance.RegisterMonster(myData);
 	}
 
 	// 일정한 간격으로 몬스터의 행동 상태를 체크
@@ -195,6 +197,11 @@ public class Native : MonoBehaviour
 		}
 	}
 
+	void OnDestroy()
+	{
+		MonsterData myData = GetState();
+		MonsterDataManager.Instance.UnregisterMonster(myData);
+	}
 	public MonsterData GetState()
 	{
 		int uniqueID = 1;
