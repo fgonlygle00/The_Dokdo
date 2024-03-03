@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public event Action GameOverEvent; // 게임매니저에서만 접근 가능하도록 만듦(이벤트를 이용해서, 함수를 이용해서 접근할 수 있도록 제작)
     public static GameManager instance;
-    public GameObject SaveButtonObject; // 최종적으로는 지우기
+  
     public GameObject PlayerObject; // 언제든지 게임메니저 인스턴스에 접근을 하면, 플레이어 오브젝트에 접근할 수 있도록 만듦
     public PlayerManager playerManager; 
     public GameObject gameOverUI;
