@@ -6,6 +6,11 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
+//public interface IDamagable
+//{
+//    void TakePhysicalDamage(int damageAmount);
+//}
+
 [System.Serializable]
 public class Condition
 {
@@ -31,6 +36,7 @@ public class Condition
     {
         return curValue / maxValue;
     }
+
 }
 
 public class PlayerConditions : MonoBehaviour, IDamagable
@@ -58,33 +64,7 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         stress.curValue = stress.startValue;
         hunger.curValue = hunger.startValue;
         stamina.curValue = stamina.startValue;
-
-        // StartCoroutine(UpdateVignetteIntensity());
     }
-
-    //IEnumerator UpdateVignetteIntensity()
-    //{
-    //    while (true)
-    //    {
-    //        if (isFacingMonster == true)
-    //        {
-    //            if (vg.profile.TryGet(out Vignette vignette))
-    //            {
-    //                vignette.intensity.value += vignetteIntensityIncrement;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (vg.profile.TryGet(out Vignette vignette))
-    //            {
-    //                vignette.intensity.value -= vignetteIntensityIncrement;
-    //            }
-    //        }
-
-    //        yield return null;
-    //        yield return new WaitForSeconds(vignetteIncreaseInterval);
-    //    }
-    //}
 
     // Update is called once per frame
     void Update()
@@ -94,6 +74,15 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         hunger.Subtract(hunger.decayRate * Time.deltaTime);
 
         stress.Subtract(stress.decayRate * Time.deltaTime);
+
+        if (Input.GetKey(KeyCode.LeftShift) && stamina.curValue > 0f)
+        {
+            stamina.Subtract(stamina.decayRate * Time.deltaTime);
+        }
+        else
+        {
+            stamina.Add(stamina.regenRate * Time.deltaTime);
+        }
 
         if (hunger.curValue == 0.0f)
             health.Subtract(noHungerHealthDecay * Time.deltaTime);
@@ -109,8 +98,10 @@ public class PlayerConditions : MonoBehaviour, IDamagable
                 if (hit.collider.CompareTag("Monster"))
                 {
                     if (vg.profile.TryGet(out Vignette vignette)) // for e.g set vignette intensity to .4f
-                    { 
+                    {
                         vignette.intensity.value += vignetteIntensityIncrement * Time.deltaTime;
+                        // stamina.Add(stamina.regenRate * Time.deltaTime);
+
                     }
                 }
                 else
@@ -118,37 +109,36 @@ public class PlayerConditions : MonoBehaviour, IDamagable
                     if (vg.profile.TryGet(out Vignette vignette)) // for e.g set vignette intensity to .4f
                     {
                         vignette.intensity.value -= vignetteIntensityIncrement * Time.deltaTime;
+                        // stamina.Subtract(stamina.regenRate * Time.deltaTime);
                     }
                 }
             }
         }
 
-        //health.uiBar.fillAmount = health.GetPercentage();
-        //stress.uiBar.fillAmount = stress.GetPercentage();
-        //hunger.uiBar.fillAmount = hunger.GetPercentage();
-        //stamina.uiBar.fillAmount = stamina.GetPercentage();
+        health.uiBar.fillAmount = health.GetPercentage();
+        stress.uiBar.fillAmount = stress.GetPercentage();
+        hunger.uiBar.fillAmount = hunger.GetPercentage();
+        stamina.uiBar.fillAmount = stamina.GetPercentage();
     }
 
     public void Heal(float amount)
     {
         health.Add(amount);
     }
-     
+
     public void Eat(float amount)
     {
         hunger.Add(amount);
     }
 
-    public void getStress(float amount)
+    public bool getStress(float amount)
     {
+        if (stress.curValue + amount < 0)
+            return false;
+
         stress.Add(amount);
-
-        if (vg.profile.TryGet(out Vignette vignette))
-        {
-            vignette.intensity.value += vignetteIntensityIncrement;
-        }
+        return true;
     }
-
 
     public bool UseStamina(float amount)
     {
@@ -161,17 +151,12 @@ public class PlayerConditions : MonoBehaviour, IDamagable
 
     public void Die()
     {
-        // Debug.Log("플레이어가 죽었다.");
+        Debug.Log("플레이어가 죽었다.");
     }
 
     public void TakePhysicalDamage(int damageAmount)
     {
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
-    }
-
-    public void SetFacingMonster(bool value)
-    {
-        isFacingMonster = value;
     }
 }
