@@ -26,7 +26,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
-  m_LightmapFlags: 6
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -127,7 +127,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 1
     - _Tiling: 0.2
-    - _Transparency: 0.95
+    - _Transparency: 0.2
     - _UVSec: 0
     - _UseFoam: 1
     - _Use_Foam: 1
@@ -140,11 +140,11 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 1
     m_Colors:
-    - _Color: {r: 0.22272162, g: 0.29436636, b: 0.3301887, a: 1}
-    - _EdgeColor: {r: 0.56559277, g: 0.7735849, b: 0.6591892, a: 1}
+    - _Color: {r: 0.18328497, g: 0.42126268, b: 0.53847563, a: 0}
+    - _EdgeColor: {r: 0.47912958, g: 0.9150943, b: 0.6765475, a: 1}
     - _Edge_Color: {r: 0.2507565, g: 0.3301887, b: 0.28799033, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FoamColor: {r: 4, g: 4, b: 4, a: 1}
+    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _Foam_Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &684404215947078111
