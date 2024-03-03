@@ -100,7 +100,7 @@ public class PlayerConditions : MonoBehaviour, IDamagable
                     if (vg.profile.TryGet(out Vignette vignette)) // for e.g set vignette intensity to .4f
                     {
                         vignette.intensity.value += vignetteIntensityIncrement * Time.deltaTime;
-                        // stamina.Add(stamina.regenRate * Time.deltaTime);
+                        stress.Add(stress.regenRate * Time.deltaTime);
 
                     }
                 }
@@ -109,7 +109,7 @@ public class PlayerConditions : MonoBehaviour, IDamagable
                     if (vg.profile.TryGet(out Vignette vignette)) // for e.g set vignette intensity to .4f
                     {
                         vignette.intensity.value -= vignetteIntensityIncrement * Time.deltaTime;
-                        // stamina.Subtract(stamina.regenRate * Time.deltaTime);
+                        stress.Subtract(stress.regenRate * Time.deltaTime);
                     }
                 }
             }
