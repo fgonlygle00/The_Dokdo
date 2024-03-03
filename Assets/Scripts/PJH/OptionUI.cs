@@ -9,14 +9,25 @@ public class OptionUI : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            OptionWindow.SetActive(true);
+            OpenWindow();
         }
+    }
+
+    private void OpenWindow()
+    {
+        OptionWindow.SetActive(true);
+        if (OptionWindow.activeInHierarchy)
+        {
+            PlayerController.instance.ToggleCursor(true);
+        }
+        else PlayerController.instance.ToggleCursor(false);
     }
 
     // 창 닫기
     public void CloseWindow()
     {
         OptionWindow.SetActive(false);
+        PlayerController.instance.ToggleCursor(false);
     }
 
     // 시작 화면으로 이동

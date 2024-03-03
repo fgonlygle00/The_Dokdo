@@ -17,13 +17,6 @@ public class Native : MonoBehaviour
 	// 몬스터의 사망 여부
 	public bool isDie = false;
 
-	[Header("Sound")]
-	public AudioSource audioSource; // AudioSource 컴포넌트 참조를 위한 변수
-	public AudioClip attackSound; // 공격 사운드 클립
-	public AudioClip damageSound; // 피해 받았을 때 사운드 클립
-	public AudioClip deathSound; // 사망 사운드 클립
-	public AudioClip wanderSound; // 배회 사운드 클립
-
 	// Animoater 파라미터의 해시값 추출
 	private readonly int hashTrace = Animator.StringToHash("IsTrace");
 	private readonly int hashAttack = Animator.StringToHash("IsAttack");
@@ -49,7 +42,7 @@ public class Native : MonoBehaviour
 		// 몬스터의 상태를 체크하는 코루틴 함수 호출
 		StartCoroutine(CheckMonsterState());
 		// 상태에 따라 몬스터의 행동을 수행하는 코루팀 함수 호출
-		StartCoroutine(MonsterAction());
+		//StartCoroutine(MonsterAction());
 	}
 
 	// 일정한 간격으로 몬스터의 행동 상태를 체크
@@ -204,6 +197,8 @@ public class Native : MonoBehaviour
 
 	public MonsterData GetState()
 	{
-		return new MonsterData(transform.position, transform.rotation, health);
+		int uniqueID = 1;
+		string monsterType = "Native";
+		return new MonsterData(uniqueID, monsterType, transform.position, transform.rotation, health);
 	}
 }
