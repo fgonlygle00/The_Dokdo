@@ -6,6 +6,7 @@ public class InfoManager : MonoBehaviour
 {
     public static InfoManager instance;
     public float dayNightCycleTime;
+    public Inventory inventory; // 인벤토리 스크립트 참조
     private void Awake()
     {
         if (instance == null)
@@ -29,6 +30,10 @@ public class InfoManager : MonoBehaviour
         {
             dayNightCycleTime = PlayerPrefs.GetFloat("DayNightCycleTime");
         }
+
+        // 인벤토리 로드
+        //inventory.LoadInventory();
+
         //기존 게임 로드 코드
         // 파일이나 데이터베이스에서 로드
         //PlayerData data = LoadPlayerDataFromFile();
