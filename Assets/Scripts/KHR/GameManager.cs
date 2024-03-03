@@ -79,11 +79,7 @@ public class GameManager : MonoBehaviour
         // 게임오버 UI 활성화
         gameOverUI.SetActive(true);
 
-        // 플레이어 조작 불가
-        //playerManager.controller.enabled = false;
-
-        // 게임 시간 정지
-        Time.timeScale = 0f; 
+        // 씬 전환으로 해보기 (게임오버가 되었을때)
 
         // 사운드 재생 등
 
