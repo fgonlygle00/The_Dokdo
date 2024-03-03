@@ -154,7 +154,7 @@ public class Native : MonoBehaviour
 		// 사망 사운드 재생
 		// audioSource.PlayOneShot(deathSound);
 
-		for (int x = 0; x < dropOnDeath.Length; x++)
+		for (int x = 0; x < dropOnDeath.Length; x++) // 카타나 드랍
 		{
 			Instantiate(dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
 		}
