@@ -32,7 +32,6 @@ public class AnimatorController : MonoBehaviour
             animator.SetBool("IsRunning", true);
         }
 
-        // 달리기 종료
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             animator.SetBool("IsRunning", false);
@@ -41,6 +40,11 @@ public class AnimatorController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             animator.SetTrigger("Jumping");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            animator.SetTrigger("Attacking");
         }
     }
 }
