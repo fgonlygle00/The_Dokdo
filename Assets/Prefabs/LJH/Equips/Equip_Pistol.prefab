@@ -504,11 +504,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd0efe561c8ee842a70f679d4b027b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 0
-  attackDistance: 0
+  attackRate: 1
+  attackDistance: 1
   doesGatherResources: 0
-  doesDealDamage: 0
-  damage: 0
+  doesDealDamage: 1
+  damage: 20
 --- !u!95 &8446405249164636391
 Animator:
   serializedVersion: 5

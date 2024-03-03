@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5343715853935645546}
   - component: {fileID: -3249784542559708604}
   - component: {fileID: 6729433668895119789}
+  - component: {fileID: -6583885555101078839}
   m_Layer: 0
   m_Name: RHEF_SpruceB
   m_TagString: Untagged
@@ -142,6 +143,22 @@ MonoBehaviour:
   itemToGive: {fileID: 11400000, guid: 5a32c299556e16c4892bc2196ae5e9a6, type: 2}
   quantityPerHit: 1
   capacity: 5
+--- !u!114 &-6583885555101078839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011065133580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352dbb7d5505f854e85df4dd3cda341e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Apple: {fileID: 11400000, guid: 79761ca5365993f42b61e7f6faed976d, type: 2}
+  HowManyPerHit: 1
+  quantity: 1
+  dropRate: 1
 --- !u!1 &1000011296233256
 GameObject:
   m_ObjectHideFlags: 0
