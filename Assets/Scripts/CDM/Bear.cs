@@ -31,13 +31,6 @@ public class Bear : MonoBehaviour, IDamagable
 
 	public float fieldOfView = 120f;
 
-	[Header("Sound")]
-	public AudioSource audioSource; // AudioSource 컴포넌트 참조를 위한 변수
-	public AudioClip attackSound; // 공격 사운드 클립
-	public AudioClip damageSound; // 피해 받았을 때 사운드 클립
-	public AudioClip deathSound; // 사망 사운드 클립
-	public AudioClip wanderSound; // 배회 사운드 클립
-
 	private NavMeshAgent agent;         // NaveMeshAgent 컴포넌트에 대한 참조
     private Animator animator;		    // Animator 컴포넌트에 대한 참조
 	private SkinnedMeshRenderer[] meshRenderers;        // 플래시 효과를 위한 SinnedMeshRenderer 컴포넌트에 대한 참조들
@@ -312,7 +305,9 @@ public class Bear : MonoBehaviour, IDamagable
 
 	public MonsterData GetState()
 	{
-		return new MonsterData(transform.position, transform.rotation, health);
+		int uniqueID = 4;
+		string monsterType = "Bear";
+		return new MonsterData(uniqueID, monsterType, transform.position, transform.rotation, health);
 	}
 
 }
