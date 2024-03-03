@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Flashlight
   m_EditorClassIdentifier: 
   displayName: "\uC190\uC804\uB4F1"
-  description: "\uC804\uBC29\uC744 \uBC1D\uAC8C \uBE5B\uB0B4\uC90D\uB2C8\uB2E4."
+  description: "X\uD0A4\uB97C \uD1B5\uD574 \uC804\uBC29\uC744 \uBC1D\uAC8C \uBE5B\uB0B4\uC90D\uB2C8\uB2E4."
   type: 1
   icon: {fileID: 21300000, guid: 42af547a671bd514a97c69c03fca1afa, type: 3}
   dropPrefab: {fileID: 4092098428463669711, guid: 970871d8b8affd74a8705c1988f7862c, type: 3}
