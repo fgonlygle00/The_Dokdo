@@ -52,7 +52,7 @@ public class UseShop : MonoBehaviour
                     if (Inventory.instance.slots[i].quantity >= 1)
                     {
                         Inventory.instance.slots[i].quantity--;
-                        Inventory.instance.AddItem(itemData[0]);
+                        Inventory.instance.AddItem(itemData[1]);
                         RemoveItem(i);
                         return;
                     }
@@ -90,7 +90,7 @@ public class UseShop : MonoBehaviour
                     {
                         Inventory.instance.slots[woodIndex].quantity -= 5;
                         Inventory.instance.slots[stoneIndex].quantity -= 3;
-                        Inventory.instance.AddItem(itemData[0]);
+                        Inventory.instance.AddItem(itemData[2]);
                         RemoveItem(woodIndex);
                         RemoveItem(stoneIndex);
                         return;
