@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 4808419896833138}
   - component: {fileID: 33081519938754520}
   - component: {fileID: 23763533842350708}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pickaxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4808419896833138
 Transform:
