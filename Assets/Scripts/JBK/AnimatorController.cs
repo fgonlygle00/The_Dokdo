@@ -42,9 +42,9 @@ public class AnimatorController : MonoBehaviour
             animator.SetTrigger("Jumping");
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            animator.SetTrigger("Attacking");
-        }
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+        //    animator.SetTrigger("Attacking");
+        //}
     }
 }
