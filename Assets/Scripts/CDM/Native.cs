@@ -151,10 +151,14 @@ public class Native : MonoBehaviour, IDamagable
 		// 사망 사운드 재생
 		// audioSource.PlayOneShot(deathSound);
 
-		for (int x = 0; x < dropOnDeath.Length; x++) // 카타나 드랍
+		if (Random.Range(1,11) == 10)
 		{
-			Instantiate(dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+			for (int x = 0; x < dropOnDeath.Length; x++) // 카타나 드랍
+			{
+				Instantiate(dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+			}
 		}
+		
 
 		// NPC 오브젝트 파괴
 		Destroy(gameObject);

@@ -100,22 +100,22 @@ public class DataManager : MonoBehaviour
     //    }
     //}
 
-    public void SetMonsterData()//몬스터에게 저장된 로드를 덮어씌우기 (스타트시점에 호출)
-    {
-        if (InfoManager.instance.IsLoad&&InfoManager.instance.monsterData != null)
-            //불러오기에서 시작했을때만, 데이터를 덮어씌우기를 하기 위해 예외처리
-        {
-            int count = 0;
-            foreach (var monster in InfoManager.instance.monsterData)
-            {
-                MonsterDataManager.Instance.monsters[count++] = monster;
-            }
-        }
-        else
-        {
-            Debug.Log("몬스터 데이터가 존재하지 않습니다.");
-        }
-    }
+    //public void SetMonsterData()//몬스터에게 저장된 로드를 덮어씌우기 (스타트시점에 호출)
+    //{
+    //    if (InfoManager.instance.IsLoad && InfoManager.instance.monsterData != null)
+    //    //불러오기에서 시작했을때만, 데이터를 덮어씌우기를 하기 위해 예외처리
+    //    {
+    //        int count = 0;
+    //        foreach (var monster in InfoManager.instance.monsterData)
+    //        {
+    //            MonsterDataManager.Instance.monsters[count++] = monster;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("몬스터 데이터가 존재하지 않습니다.");
+    //    }
+    //}
 }
 
 

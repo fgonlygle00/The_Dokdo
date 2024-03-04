@@ -3597,7 +3597,7 @@ GameObject:
   - component: {fileID: 2185276340306233089}
   - component: {fileID: 9201695839115116486}
   - component: {fileID: 317056617327175053}
-  - component: {fileID: 5698105326306118383}
+  - component: {fileID: 7335019748102551133}
   m_Layer: 0
   m_Name: Native
   m_TagString: Untagged
@@ -3621,7 +3621,7 @@ Transform:
   - {fileID: 8011349814109129364}
   - {fileID: 4185725551486204604}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2185276340306233089
 Animator:
@@ -3656,15 +3656,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ff97a043a5fdb438cd473be95b2d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 5
+  State: 0
   dropOnDeath:
   - {fileID: 11400000, guid: 6bd54fef4d57a1a459dfefb237d40a6e, type: 2}
   health: 5
-  damage: 0
+  damage: 2
   traceDistance: 10
   attackDistance: 2
   wanderDistance: 20
-  isDie: 1
+  isDie: 0
 --- !u!195 &317056617327175053
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3687,8 +3687,8 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &5698105326306118383
-BoxCollider:
+--- !u!136 &7335019748102551133
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3705,9 +3705,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.83346915, y: 1.8536632, z: 0.65412736}
-  m_Center: {x: -0.027126672, y: 0.91133124, z: 0.017818876}
+  serializedVersion: 2
+  m_Radius: 0.4513889
+  m_Height: 1.9558462
+  m_Direction: 1
+  m_Center: {x: -0.009629992, y: 0.8965853, z: 0}
 --- !u!1 &6558135285754506793
 GameObject:
   m_ObjectHideFlags: 0
