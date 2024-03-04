@@ -20,7 +20,7 @@ public class MonsterDataManager : MonoBehaviour
 	}
     private void Start()
     {
-        DataManager.instance
+        //DataManager.instance
     }
 
     public void RegisterMonster(MonsterData monsterData)

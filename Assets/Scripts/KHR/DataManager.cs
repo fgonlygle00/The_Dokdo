@@ -30,22 +30,22 @@ public class DataManager : MonoBehaviour
 
 
 
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            if (Instance != this)
-            { Destroy(gameObject)}
-        }
+    //void Awake()
+    //{
+    //    if (Instance == null)
+    //    {
+    //        Instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //    }
+    //    else
+    //    {
+    //        if (Instance != this)
+    //        { Destroy(gameObject)}
+    //    }
 
-        savePath = Path.Combine(Application.persistentDataPath, "save.json");
+    //    savePath = Path.Combine(Application.persistentDataPath, "save.json");
 
-    }
+    //}
 
     // 세이브 버튼 ui 를 눌렀을때 저장되도록 
     public void SaveGame()
