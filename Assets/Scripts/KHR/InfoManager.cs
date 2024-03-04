@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class InfoManager : MonoBehaviour
 {
+    public Vector3 playerPositions;
+    public bool IsLoad = false;
+    public ItemSlot[] slots;
     public static InfoManager instance;
     public List<float> playerCurValue = new List<float>();
     public List<MonsterData> monsterData = new List<MonsterData>();
-   [SerializeField] private string savePath; // °ÔÀÓ ÀúÀå ÆÄÀÏ °æ·Î
+   [SerializeField] private string savePath; // ê²Œì„ ì €ì¥ íŒŒì¼ ê²½ë¡œ
 
-    private void Awake() // ½Ì±ÛÅæÈ­
+    private void Awake() // ì‹±ê¸€í†¤í™”
     {
         if (instance == null)
         {
@@ -29,36 +32,35 @@ public class InfoManager : MonoBehaviour
         savePath = Path.Combine(Application.persistentDataPath, "save.json");
     }
 
-    // °ÔÀÓ ÀúÀå ½Ã È£ÃâµÇ´Â ¸Ş¼­µå
+    // ê²Œì„ ì €ì¥ ì‹œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
 
-    // °ÔÀÓ ºÒ·¯¿À±â ½Ã È£ÃâµÇ´Â ¸Ş¼­µå
+    // ê²Œì„ ë¶ˆëŸ¬ì˜¤ê¸° ì‹œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
     public void LoadGame()
     {
         SceneManager.LoadScene("MainScene 1");
         if (!File.Exists(savePath))
         {
-            // ÀúÀåµÈ °ÔÀÓ ÆÄÀÏÀÌ ¾øÀ» °æ¿ì ·ÎµåÇÒ ¼ö ¾øÀ½À» ¾Ë¸²
-            Debug.Log("ÀúÀåµÈ °ÔÀÓÀÌ ¾ø½À´Ï´Ù.");
+            // ì €ì¥ëœ ê²Œì„ íŒŒì¼ì´ ì—†ì„ ê²½ìš° ë¡œë“œí•  ìˆ˜ ì—†ìŒì„ ì•Œë¦¼
+            Debug.Log("ì €ì¥ëœ ê²Œì„ì´ ì—†ìŠµë‹ˆë‹¤.");
             return;
         }
 
-        // ÆÄÀÏ¿¡¼­ ÀúÀåµÈ °ÔÀÓ µ¥ÀÌÅÍ¸¦ ÀĞ¾î¿È
+        // íŒŒì¼ì—ì„œ ì €ì¥ëœ ê²Œì„ ë°ì´í„°ë¥¼ ì½ì–´ì˜´
         string jsonData = File.ReadAllText(savePath);
         GameSaveData gameSaveData = JsonUtility.FromJson<GameSaveData>(jsonData);
 
-        // ÇÃ·¹ÀÌ¾î Á¤º¸ ·Îµå
+        // í”Œë ˆì´ì–´ ì •ë³´ ë¡œë“œ
         playerCurValue = gameSaveData.playerCurValue;
         //playerConditions.SetPlayerData(playerData.health, playerData.stress, playerData.condition, playerData.hunger);
 
-        //// ¾ÆÀÌÅÛ Á¤º¸ ·Îµå
-        //ItemData itemData = gameSaveData.itemData;
-        //inventory.LoadEquippedItem(itemData.equippedItemID);
-        //inventory.LoadInventoryItems(itemData.inventoryItems);
+        //// ì•„ì´í…œ ì •ë³´ ë¡œë“œ
+        slots = gameSaveData.slots;
 
-        // ¸ó½ºÅÍ Á¤º¸ ·Îµå
+
+        // ëª¬ìŠ¤í„° ì •ë³´ ë¡œë“œ
         monsterData = gameSaveData.monsterData;
         //monsterManager.LoadDeadMonsterCount(monsterData.deadMonsterCount);
-        //ÇØ´ç ÁÖ¼® Ã³¸® ºÎºĞÀº ¸ŞÀÎ¾ÀÀ» ºÒ·¯¿Ã¶§ Ã³¸®(¸ŞÀÎ¾À¿¡ ÀÖ´Â ±âÁ¸ ¸Å´ÏÀúµéÀÌ Ã³¸®ÇÏ¸é µÇ°Ô²û,,)
+        //í•´ë‹¹ ì£¼ì„ ì²˜ë¦¬ ë¶€ë¶„ì€ ë©”ì¸ì”¬ì„ ë¶ˆëŸ¬ì˜¬ë•Œ ì²˜ë¦¬(ë©”ì¸ì”¬ì— ìˆëŠ” ê¸°ì¡´ ë§¤ë‹ˆì €ë“¤ì´ ì²˜ë¦¬í•˜ë©´ ë˜ê²Œë”,,)
 
     }
 }

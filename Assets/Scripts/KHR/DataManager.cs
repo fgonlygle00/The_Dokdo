@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO; //ÆÄÀÏÀÌ¶ó´Â Ä£±¸¸¦ ¾µ¼ö ÀÖ°Ô ÇØÁÖ´Â ¼±¾ğ
+using System.IO; //íŒŒì¼ì´ë¼ëŠ” ì¹œêµ¬ë¥¼ ì“¸ìˆ˜ ìˆê²Œ í•´ì£¼ëŠ” ì„ ì–¸
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 [System.Serializable]
@@ -10,8 +11,8 @@ using UnityEngine;
 public class GameSaveData
 {
     public List<float> playerCurValue = new List<float>();
-    // new List<float>(); »ı·«ÇÒ ¼ö ÀÖÀ¸³ª ±× ºÎºĞÀº: MonoBehaviour¸¦ »ó¼Ó ¹Ş¾ÒÀ»¶§¸¸ »ı·«ÀÌ °¡´É
-    public ItemData itemData;
+    // new List<float>(); ìƒëµí•  ìˆ˜ ìˆìœ¼ë‚˜ ê·¸ ë¶€ë¶„ì€: MonoBehaviourë¥¼ ìƒì† ë°›ì•˜ì„ë•Œë§Œ ìƒëµì´ ê°€ëŠ¥
+    public ItemSlot[] slots;
     public int selectedItemIndex;
     public List<MonsterData> monsterData;
     public Vector3 playerPositions;
@@ -20,57 +21,71 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public PlayerManager playerManager;
-    public DayNightCycle dayNightCycle;  // Ãß°¡µÈ ¼Ó¼º
-    public PlayerConditions playerConditions; // ÇÃ·¹ÀÌ¾î ÄÁÆ®·Ñ·¯ ½ºÅ©¸³Æ® ÂüÁ¶(ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®¿¡ ÀÖÀ½)
+    public DayNightCycle dayNightCycle;  // ì¶”ê°€ëœ ì†ì„±
+    public PlayerConditions playerConditions; // í”Œë ˆì´ì–´ ì»¨íŠ¸ë¡¤ëŸ¬ ìŠ¤í¬ë¦½íŠ¸ ì°¸ì¡°(í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ì— ìˆìŒ)
 
-    [SerializeField] private string savePath; // °ÔÀÓ ÀúÀå ÆÄÀÏ °æ·Î
+    [SerializeField] private string savePath; // ê²Œì„ ì €ì¥ íŒŒì¼ ê²½ë¡œ
 
+    public ItemData LoadItemData(string itemName)
+    {
+        string json = PlayerPrefs.GetString(itemName);
+        ItemData itemData = JsonUtility.FromJson<ItemData>(json);
+        return itemData;
+    }
 
     void Awake()
     {
+
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             if (Instance != this)
             {
                 Destroy(gameObject);
-            }          
+            }
         }
+            DontDestroyOnLoad(gameObject);
         savePath = Path.Combine(Application.persistentDataPath, "save.json");
     }
+     void Start()
+    {
+        playerConditions =  GameManager.instance.PlayerObject.GetComponent<PlayerConditions>();
+    }
 
-    // ¼¼ÀÌºê ¹öÆ° ui ¸¦ ´­·¶À»¶§ ÀúÀåµÇ  µµ·Ï 
+    // ì„¸ì´ë¸Œ ë²„íŠ¼ ui ë¥¼ ëˆŒë €ì„ë•Œ ì €ì¥ë˜  ë„ë¡ 
     public void SaveGame()
     {
         GameSaveData gameSaveData = new GameSaveData();
 
-        // ÇÃ·¹ÀÌ¾î Á¤º¸ ÀúÀå
+        // í”Œë ˆì´ì–´ ì •ë³´ ì €ì¥
         gameSaveData.playerCurValue.Add(playerConditions.health.curValue);
         gameSaveData.playerCurValue.Add(playerConditions.stress.curValue);
         gameSaveData.playerCurValue.Add(playerConditions.hunger.curValue);
         gameSaveData.playerCurValue.Add(playerConditions.stamina.curValue);
-     
+
         Debug.Log(MonsterDataManager.Instance.GetMonsters().Count);
         gameSaveData.monsterData = MonsterDataManager.Instance.GetMonsters();
         gameSaveData.selectedItemIndex = Inventory.instance.selectedItemIndex;
         gameSaveData.playerPositions = playerConditions.transform.position;
 
-        // °ÔÀÓ ÀúÀå µ¥ÀÌÅÍ¸¦ JSON Çü½ÄÀ¸·Î º¯È¯ÇÏ¿© ÆÄÀÏ¿¡ ÀúÀå
+        // ì•„ì´í…œ ì •ë³´ ì €ì¥
+        gameSaveData.slots = Inventory.instance.slots;
+
+        // ê²Œì„ ì €ì¥ ë°ì´í„°ë¥¼ JSON í˜•ì‹ìœ¼ë¡œ ë³€í™˜í•˜ì—¬ íŒŒì¼ì— ì €ì¥
         string jsonData = JsonUtility.ToJson(gameSaveData);
         File.WriteAllText(savePath, jsonData);
 
         PlayerPrefs.SetFloat("DayNightCycleTime", dayNightCycle.time);
         //PlayerPrefs.Save();
-        Debug.Log("¼¼ÀÌºê¹öÆ°Å¬¸¯");
+        Debug.Log("ì„¸ì´ë¸Œë²„íŠ¼í´ë¦­");
 
     }
 
 
-    // ½ÃÀÛÈ­¸é¿¡¼­ ºÒ·¯¿À±â 
+    // ì‹œì‘í™”ë©´ì—ì„œ ë¶ˆëŸ¬ì˜¤ê¸° 
     public void LoadGame()
     {
         if (PlayerPrefs.HasKey("DayNightCycleTime"))
@@ -78,44 +93,75 @@ public class DataManager : MonoBehaviour
             dayNightCycle.time = PlayerPrefs.GetFloat("DayNightCycleTime");
         }
 
-        Debug.Log("¼¼ÀÌºê¹öÆ°Å¬¸¯");
+        Debug.Log("ì„¸ì´ë¸Œë²„íŠ¼í´ë¦­");
 
     }
 
-    //public void SetPlayerData() //ÇÃ·¹ÀÌ¾î¿¡°Ô ÀúÀåµÈ ·Îµå¸¦ µ¤¾î¾º¿ì±â (½ºÅ¸Æ®½ÃÁ¡¿¡ È£Ãâ)
-    //{
-    //    if (InfoManager.instance.IsLoad&&InfoManager.instance.playerCurValue != null)
-    //    //ºÒ·¯¿À±â¿¡¼­ ½ÃÀÛÇßÀ»¶§¸¸, µ¥ÀÌÅÍ¸¦ µ¤¾î¾º¿ì±â¸¦ ÇÏ±â À§ÇØ ¿¹¿ÜÃ³¸®
-    //    {
-    //        playerConditions.health.curValue = InfoManager.instance.playerCurValue[0];
-    //        playerConditions.stress.curValue = InfoManager.instance.playerCurValue[1];
-    //        playerConditions.hunger.curValue = InfoManager.instance.playerCurValue[2];
-    //        playerConditions.stamina.curValue = InfoManager.instance.playerCurValue[3];
-    //        GameManager.instance.PlayerObject.transform.position = InfoManager.instance.playerPositions;
-    //        // ·ÎµåÇßÀ»¶§ ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡°ª ÃÊ±âÈ­ 
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("ÇÃ·¹ÀÌ¾î ÄÁµğ¼Ç µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
-    //    }
-    //}
+    public void SetPlayerData() //í”Œë ˆì´ì–´ì—ê²Œ ì €ì¥ëœ ë¡œë“œë¥¼ ë®ì–´ì”Œìš°ê¸° (ìŠ¤íƒ€íŠ¸ì‹œì ì— í˜¸ì¶œ)
+    {
+        if (InfoManager.instance.IsLoad && InfoManager.instance.playerCurValue != null)
+        //ë¶ˆëŸ¬ì˜¤ê¸°ì—ì„œ ì‹œì‘í–ˆì„ë•Œë§Œ, ë°ì´í„°ë¥¼ ë®ì–´ì”Œìš°ê¸°ë¥¼ í•˜ê¸° ìœ„í•´ ì˜ˆì™¸ì²˜ë¦¬
+        {
+            if(playerConditions == null)
+            {
+                playerConditions = GameManager.instance.PlayerObject.GetComponent<PlayerConditions>();
+            }
+            playerConditions.health.curValue = InfoManager.instance.playerCurValue[0];
+            playerConditions.stress.curValue = InfoManager.instance.playerCurValue[1];
+            playerConditions.hunger.curValue = InfoManager.instance.playerCurValue[2];
+            playerConditions.stamina.curValue = InfoManager.instance.playerCurValue[3];
+            //
+            Scene scene = SceneManager.GetActiveScene();
+            // í˜„ì¬ í™œì„±í™” ëœ ì”¬ì„ ë„£ì–´ì¤Œ
+            if (scene.name == "DungeonScene_1Zone" || scene.name == "DungeonScene_2Zone" || scene.name == "DungeonScene_3Zone")
+            {
+                return;
+            }
+            
+            GameManager.instance.PlayerObject.transform.position = InfoManager.instance.playerPositions;
+            // ë¡œë“œí–ˆì„ë•Œ í”Œë ˆì´ì–´ì˜ ìœ„ì¹˜ê°’ ì´ˆê¸°í™” 
+            //ë¶ˆëŸ¬ì˜¨ ì•„ì´í…œ ë°ì´í„°ë¥¼ InfoManagerì— ì €ì¥
+            
 
-    //public void SetMonsterData()//¸ó½ºÅÍ¿¡°Ô ÀúÀåµÈ ·Îµå¸¦ µ¤¾î¾º¿ì±â (½ºÅ¸Æ®½ÃÁ¡¿¡ È£Ãâ)
-    //{
-    //    if (InfoManager.instance.IsLoad && InfoManager.instance.monsterData != null)
-    //    //ºÒ·¯¿À±â¿¡¼­ ½ÃÀÛÇßÀ»¶§¸¸, µ¥ÀÌÅÍ¸¦ µ¤¾î¾º¿ì±â¸¦ ÇÏ±â À§ÇØ ¿¹¿ÜÃ³¸®
-    //    {
-    //        int count = 0;
-    //        foreach (var monster in InfoManager.instance.monsterData)
-    //        {
-    //            MonsterDataManager.Instance.monsters[count++] = monster;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("¸ó½ºÅÍ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
-    //    }
-    //}
+        }
+        else
+        {
+            Debug.Log("í”Œë ˆì´ì–´ ì»¨ë””ì…˜ ë°ì´í„°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+        }
+    }
+
+    public void SetItemData()
+    {
+        if (InfoManager.instance.IsLoad && InfoManager.instance.slots != null)
+        {
+            //ë¶ˆëŸ¬ì˜¤ê¸°ì—ì„œ ì‹œì‘í–ˆì„ë•Œë§Œ, ë°ì´í„°ë¥¼ ë®ì–´ì”Œìš°ê¸°ë¥¼ í•˜ê¸° ìœ„í•´ ì˜ˆì™¸ì²˜ë¦¬
+
+            string itemName = "exampleItem"; // ë¶ˆëŸ¬ì˜¬ ì•„ì´í…œ ì´ë¦„ì„ ì§€ì •
+            ItemData itemData = LoadItemData(itemName);
+            ItemSlotUI[] itemSlotUI = GameManager.instance.PlayerObject.GetComponent<Inventory>().uiSlots;
+           
+            GameManager.instance.PlayerObject.GetComponent<Inventory>().slots = InfoManager.instance.slots;
+            // InfoManagerì— ì•„ì´í…œ ë°ì´í„°ë¥¼ ì €ì¥
+          
+        }
+    }
+
+    public void SetMonsterData()//ëª¬ìŠ¤í„°ì—ê²Œ ì €ì¥ëœ ë¡œë“œë¥¼ ë®ì–´ì”Œìš°ê¸° (ìŠ¤íƒ€íŠ¸ì‹œì ì— í˜¸ì¶œ)
+    {
+        if (InfoManager.instance.IsLoad && InfoManager.instance.monsterData != null)
+        //ë¶ˆëŸ¬ì˜¤ê¸°ì—ì„œ ì‹œì‘í–ˆì„ë•Œë§Œ, ë°ì´í„°ë¥¼ ë®ì–´ì”Œìš°ê¸°ë¥¼ í•˜ê¸° ìœ„í•´ ì˜ˆì™¸ì²˜ë¦¬
+        {
+            int count = 0;
+            foreach (var monster in InfoManager.instance.monsterData)
+            {
+                MonsterDataManager.Instance.monsters[count++] = monster;
+            }
+        }
+        else
+        {
+            Debug.Log("ëª¬ìŠ¤í„° ë°ì´í„°ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+        }
+    }
 }
 
 
