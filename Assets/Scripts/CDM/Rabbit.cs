@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Rabbit : MonoBehaviour
+public class Rabbit : MonoBehaviour, IDamagable
 {
 	[Header("Stats")]
 	public float walkSpeed;
@@ -205,7 +205,7 @@ public class Rabbit : MonoBehaviour
 
 		for (int x = 0; x < dropOnDeath.Length; x++)
 		{
-			Instantiate(dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+			Instantiate(dropOnDeath[x].dropPrefab, transform.position + Vector3.up * 3, Quaternion.identity);
 		}
 
 		// NPC 오브젝트 파괴
