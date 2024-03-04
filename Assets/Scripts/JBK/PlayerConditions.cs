@@ -53,7 +53,7 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     private bool isFacingMonster = false;
 
     public float lineSize = 16f;
-    public float linePosition = 5.0f;
+    public float linePosition = 3.0f;
 
     public Volume vg;
 
@@ -161,4 +161,9 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
     }
+
+    //public void Running(bool isRunning)
+    //{
+
+    //}
 }

@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidbody;
 
     public static PlayerController instance;
+
+
+    PlayerConditions playerConditions;
     private void Awake()
     {
         instance = this;
@@ -38,6 +41,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+
+        playerConditions = GetComponent<PlayerConditions>();
+        DataManager.Instance.SetPlayerData();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -56,10 +62,13 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && playerConditions.stamina.curValue > 10)
+        {
             moveSpeed = runSpeed;
+        }
         else
             moveSpeed = normalSpeed;
+
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
         dir.y = _rigidbody.velocity.y;
