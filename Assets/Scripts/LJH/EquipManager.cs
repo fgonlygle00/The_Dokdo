@@ -48,6 +48,7 @@ public class EquipManager : MonoBehaviour
 
     public void OnHit()
     {
+        Debug.Log("애니메이션");
         curEquip.OnHit();
     }
 }

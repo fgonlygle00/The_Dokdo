@@ -3598,6 +3598,7 @@ GameObject:
   - component: {fileID: 9201695839115116486}
   - component: {fileID: 317056617327175053}
   - component: {fileID: 5698105326306118383}
+  - component: {fileID: -5770401370972948287}
   m_Layer: 0
   m_Name: Native
   m_TagString: Untagged
@@ -3659,16 +3660,11 @@ MonoBehaviour:
   State: 5
   dropOnDeath:
   - {fileID: 11400000, guid: 6bd54fef4d57a1a459dfefb237d40a6e, type: 2}
-  health: 100
+  health: 5
   traceDistance: 10
   attackDistance: 2
   wanderDistance: 20
   isDie: 1
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
-  damageSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  wanderSound: {fileID: 0}
 --- !u!195 &317056617327175053
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3712,6 +3708,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.83346915, y: 1.8536632, z: 0.65412736}
   m_Center: {x: -0.027126672, y: 0.91133124, z: 0.017818876}
+--- !u!54 &-5770401370972948287
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6550230593858622267}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6558135285754506793
 GameObject:
   m_ObjectHideFlags: 0
