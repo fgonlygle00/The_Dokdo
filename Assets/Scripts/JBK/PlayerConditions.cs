@@ -53,7 +53,7 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     private bool isFacingMonster = false;
 
     public float lineSize = 16f;
-    public float linePosition = 5.0f;
+    public float linePosition = 3.0f;
 
     public Volume vg;
 
@@ -76,6 +76,8 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         hunger.Subtract(hunger.decayRate * Time.deltaTime);
 
         stress.Subtract(stress.decayRate * Time.deltaTime);
+
+        Debug.Log(stamina.curValue);
 
         if (Input.GetKey(KeyCode.LeftShift) && stamina.curValue > 0f)
         {
@@ -161,4 +163,9 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
     }
+
+    //public void Running(bool isRunning)
+    //{
+
+    //}
 }
