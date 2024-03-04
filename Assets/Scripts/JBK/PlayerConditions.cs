@@ -53,6 +53,7 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     private bool isFacingMonster = false;
 
     public float lineSize = 16f;
+    public float linePosition = 5.0f;
 
     public Volume vg;
 
@@ -69,7 +70,8 @@ public class PlayerConditions : MonoBehaviour, IDamagable
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward * lineSize, Color.yellow);
+        Vector3 raycastStart = transform.position + Vector3.up * linePosition;
+        Debug.DrawRay(raycastStart, transform.forward * lineSize, Color.yellow);
 
         hunger.Subtract(hunger.decayRate * Time.deltaTime);
 
@@ -93,11 +95,11 @@ public class PlayerConditions : MonoBehaviour, IDamagable
         if (isFacingMonster == false)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, lineSize))
+            if (Physics.Raycast(raycastStart, transform.forward, out hit, lineSize))
             {
                 if (hit.collider.CompareTag("Monster"))
                 {
-                    if (vg.profile.TryGet(out Vignette vignette)) // for e.g set vignette intensity to .4f
+                    if (vg.profile.TryGet(out Vignette vignette))
                     {
                         vignette.intensity.value += vignetteIntensityIncrement * Time.deltaTime;
                         stress.Add(stress.regenRate * Time.deltaTime);
@@ -106,7 +108,7 @@ public class PlayerConditions : MonoBehaviour, IDamagable
                 }
                 else
                 {
-                    if (vg.profile.TryGet(out Vignette vignette)) // for e.g set vignette intensity to .4f
+                    if (vg.profile.TryGet(out Vignette vignette))
                     {
                         vignette.intensity.value -= vignetteIntensityIncrement * Time.deltaTime;
                         stress.Subtract(stress.regenRate * Time.deltaTime);
