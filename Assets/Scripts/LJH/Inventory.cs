@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using static UnityEditor.Progress;
 
+[System.Serializable]
 public class ItemSlot
 {
     public ItemData item;
@@ -16,7 +17,7 @@ public class ItemSlot
 public class Inventory : MonoBehaviour
 {
     public ItemSlotUI[] uiSlots;
-    public ItemSlot[] slots;
+    public ItemSlot[] slots; // 아이템 데이터 (아이템 이름, 아이템 갯수) 스트링으로 저장,, ㄴㄴ
 
     public GameObject inventoryWindow;
     public Transform dropPosition;
@@ -60,6 +61,8 @@ public class Inventory : MonoBehaviour
             uiSlots[i].index = i;
             uiSlots[i].Clear();
         }
+        DataManager.Instance.SetItemData();
+        UpdateUI();
 
         ClearSeletecItemWindow();
     }

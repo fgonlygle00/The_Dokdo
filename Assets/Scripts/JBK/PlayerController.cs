@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
 
+        DataManager.Instance.SetPlayerData();
         playerConditions = GetComponent<PlayerConditions>();
-        //DataManager.Instance.SetPlayerData();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
