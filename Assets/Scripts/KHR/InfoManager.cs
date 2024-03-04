@@ -7,6 +7,7 @@ public class InfoManager : MonoBehaviour
 {
     public Vector3 playerPositions;
     public bool IsLoad = false;
+    public ItemSlot[] slots;
     public static InfoManager instance;
     public List<float> playerCurValue = new List<float>();
     public List<MonsterData> monsterData = new List<MonsterData>();
@@ -53,9 +54,8 @@ public class InfoManager : MonoBehaviour
         // 플레이어 정보 로드
         playerCurValue = gameSaveData.playerCurValue;
         //// 아이템 정보 로드
-        //ItemData itemData = gameSaveData.itemData;
-        //inventory.LoadEquippedItem(itemData.equippedItemID);
-        //inventory.LoadInventoryItems(itemData.inventoryItems);
+        slots = gameSaveData.slots;
+
 
         // 몬스터 정보 로드
         monsterData = gameSaveData.monsterData;

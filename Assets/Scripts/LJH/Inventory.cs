@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using static UnityEditor.Progress;
 
+[System.Serializable]
 public class ItemSlot
 {
     public ItemData item;
@@ -60,6 +61,8 @@ public class Inventory : MonoBehaviour
             uiSlots[i].index = i;
             uiSlots[i].Clear();
         }
+        DataManager.Instance.SetItemData();
+        UpdateUI();
 
         ClearSeletecItemWindow();
     }
