@@ -9,7 +9,6 @@ public class UseShop : MonoBehaviour
     {
         shopWindow.SetActive(true);
         PlayerController.instance.ToggleCursor(true);
-        PurchaseInfoAlarm.instance.AlarmTextAlphaZero();
     }
 
     private void OnTriggerExit(Collider other)

@@ -11,20 +11,20 @@ public class InfoManager : MonoBehaviour
     public static InfoManager instance;
     public List<float> playerCurValue = new List<float>();
     public List<MonsterData> monsterData = new List<MonsterData>();
-    [SerializeField] private string savePath; // °ÔÀÓ ÀúÀå ÆÄÀÏ °æ·Î
+   [SerializeField] private string savePath; // ê²Œì„ ì €ì¥ íŒŒì¼ ê²½ë¡œ
 
-    private void Awake() // ½Ì±ÛÅæÈ­
+    private void Awake() // ì‹±ê¸€í†¤í™”
     {
         if (instance == null)
         {
             instance = this;
 
             DontDestroyOnLoad(gameObject);
-
+      
         }
         else
         {
-            if (instance != this)
+            if(instance != this)
             {
                 Destroy(gameObject);
             }
@@ -32,33 +32,36 @@ public class InfoManager : MonoBehaviour
         savePath = Path.Combine(Application.persistentDataPath, "save.json");
     }
 
-    // °ÔÀÓ ÀúÀå ½Ã È£ÃâµÇ´Â ¸Ş¼­µå
+    // ê²Œì„ ì €ì¥ ì‹œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
 
-    // °ÔÀÓ ºÒ·¯¿À±â ½Ã È£ÃâµÇ´Â ¸Ş¼­µå
+    // ê²Œì„ ë¶ˆëŸ¬ì˜¤ê¸° ì‹œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
     public void LoadGame()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("MainScene 1");
         if (!File.Exists(savePath))
         {
-            // ÀúÀåµÈ °ÔÀÓ ÆÄÀÏÀÌ ¾øÀ» °æ¿ì ·ÎµåÇÒ ¼ö ¾øÀ½À» ¾Ë¸²
-            Debug.Log("ÀúÀåµÈ °ÔÀÓÀÌ ¾ø½À´Ï´Ù.");
+            // ì €ì¥ëœ ê²Œì„ íŒŒì¼ì´ ì—†ì„ ê²½ìš° ë¡œë“œí•  ìˆ˜ ì—†ìŒì„ ì•Œë¦¼
+            Debug.Log("ì €ì¥ëœ ê²Œì„ì´ ì—†ìŠµë‹ˆë‹¤.");
             return;
         }
-        IsLoad = true;
 
-        // ÆÄÀÏ¿¡¼­ ÀúÀåµÈ °ÔÀÓ µ¥ÀÌÅÍ¸¦ ÀĞ¾î¿È
+        // íŒŒì¼ì—ì„œ ì €ì¥ëœ ê²Œì„ ë°ì´í„°ë¥¼ ì½ì–´ì˜´
         string jsonData = File.ReadAllText(savePath);
         GameSaveData gameSaveData = JsonUtility.FromJson<GameSaveData>(jsonData);
-        playerPositions = gameSaveData.playerPositions;
 
-        // ÇÃ·¹ÀÌ¾î Á¤º¸ ·Îµå
+        // í”Œë ˆì´ì–´ ì •ë³´ ë¡œë“œ
         playerCurValue = gameSaveData.playerCurValue;
-        //// ¾ÆÀÌÅÛ Á¤º¸ ·Îµå
+        //playerConditions.SetPlayerData(playerData.health, playerData.stress, playerData.condition, playerData.hunger);
+
+        //// ì•„ì´í…œ ì •ë³´ ë¡œë“œ
         slots = gameSaveData.slots;
 
 
-        // ¸ó½ºÅÍ Á¤º¸ ·Îµå
+        // ëª¬ìŠ¤í„° ì •ë³´ ë¡œë“œ
         monsterData = gameSaveData.monsterData;
+        //monsterManager.LoadDeadMonsterCount(monsterData.deadMonsterCount);
+        //í•´ë‹¹ ì£¼ì„ ì²˜ë¦¬ ë¶€ë¶„ì€ ë©”ì¸ì”¬ì„ ë¶ˆëŸ¬ì˜¬ë•Œ ì²˜ë¦¬(ë©”ì¸ì”¬ì— ìˆëŠ” ê¸°ì¡´ ë§¤ë‹ˆì €ë“¤ì´ ì²˜ë¦¬í•˜ë©´ ë˜ê²Œë”,,)
+
     }
 }
 

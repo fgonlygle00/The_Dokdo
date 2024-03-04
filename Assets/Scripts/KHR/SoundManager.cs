@@ -11,6 +11,8 @@ public class SoundManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+  
+
     // 리소스 폴더에서 특정 오디오 파일 재생
     public void PlayAudioFromResources(string audioFileName)
     {

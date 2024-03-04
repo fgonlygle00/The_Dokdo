@@ -2150,7 +2150,7 @@ GameObject:
   - component: {fileID: 2257108261677825471}
   - component: {fileID: 6511884800348204552}
   - component: {fileID: 939848835020727260}
-  - component: {fileID: 7258265163132902886}
+  - component: {fileID: -5216671580977793580}
   m_Layer: 0
   m_Name: Zombie1
   m_TagString: Monster
@@ -2186,7 +2186,7 @@ Transform:
   - {fileID: 6712167140225584768}
   - {fileID: 4858108247336543915}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2257108261677825471
 Animator:
@@ -2244,14 +2244,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  damage: 2
   State: 0
   dropOnDeath: []
-  traceDistance: 20
-  attackDistance: 2
+  traceDistance: 15
+  attackDistance: 4
   wanderDistance: 20
   isDie: 0
---- !u!65 &7258265163132902886
-BoxCollider:
+--- !u!136 &-5216671580977793580
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2268,9 +2269,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.8788108, z: 0.72075754}
-  m_Center: {x: 0, y: 0.9024325, z: 0.012512274}
+  serializedVersion: 2
+  m_Radius: 0.5681017
+  m_Height: 1.9286019
+  m_Direction: 1
+  m_Center: {x: -0.022379559, y: 0.95783293, z: 0}
 --- !u!1 &6265843260367301853
 GameObject:
   m_ObjectHideFlags: 0

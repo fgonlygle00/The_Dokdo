@@ -63,6 +63,7 @@ public class Zombie : MonoBehaviour , IDamagable
 			if (distance <= attackDistance)
 			{
 				State = AIState.Attacking;
+				
 			}
 
 			// 추적 사정거리 범위로 들어왔는지 확인
@@ -119,7 +120,6 @@ public class Zombie : MonoBehaviour , IDamagable
 			}
 			yield return new WaitForSeconds(0.3f);
 		}
-
 	}
 
 	private Vector3 RandomWanderPoint()
@@ -137,7 +137,6 @@ public class Zombie : MonoBehaviour , IDamagable
 		NavMesh.SamplePosition(wanderPoint, out navHit, wanderDistance, -1);
 
 		return navHit.position;
-
 	}
 
 	// NPC가 받은 손상 처리
@@ -218,6 +217,4 @@ public class Zombie : MonoBehaviour , IDamagable
 		string monsterType = "Zombie";
 		return new MonsterData(uniqueID, monsterType, transform.position, transform.rotation, health);
 	}
-
-
 }

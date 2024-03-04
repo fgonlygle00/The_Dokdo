@@ -23,7 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DungeonScene_3Zone.unity
     guid: 5b8944ca08e60e84f9b2fcb62e1066ed
-  - enabled: 1
-    path: Assets/Scenes/DEV_TestScene_KHR/MainScene 1.unity
-    guid: 59ad4737f5ecb154fafa781daf080d46
   m_configObjects: {}

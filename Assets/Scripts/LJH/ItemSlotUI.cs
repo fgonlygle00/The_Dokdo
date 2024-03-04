@@ -11,7 +11,7 @@ public class ItemSlotUI : MonoBehaviour
     public TextMeshProUGUI quatityText;
     private ItemSlot curSlot;
     private Outline outline;
-      
+
     public int index;
     public bool equipped;
 

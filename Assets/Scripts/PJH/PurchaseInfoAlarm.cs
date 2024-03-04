@@ -14,12 +14,6 @@ public class PurchaseInfoAlarm : MonoBehaviour
         instance = this;
     }
 
-    public void AlarmTextAlphaZero()
-    {
-        shortageText.color = new Color(shortageText.color.r, shortageText.color.g, shortageText.color.b, 0);
-        purchaseText.color = new Color(purchaseText.color.r, purchaseText.color.g, purchaseText.color.b, 0);
-    }
-
     public void ShortageAlarm()
     {
         StartCoroutine(FadeTextToZeroAlpha(fadeOutTime, shortageText));
