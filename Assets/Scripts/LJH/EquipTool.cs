@@ -31,8 +31,11 @@ public class EquipTool : Equip
                 resouce.Gather(hit.point, hit.normal);
             }
 
+            Debug.Log(hit.collider.gameObject.name);
+
             if (doesDealDamage && hit.collider.TryGetComponent(out IDamagable damageable))
             {
+                Debug.Log("АјАн");
                 damageable.TakePhysicalDamage(damage);
             }
         }

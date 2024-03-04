@@ -46,5 +46,15 @@ public class AnimatorController : MonoBehaviour
         //{
         //    animator.SetTrigger("Attacking");
         //}
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            animator.SetBool("Focusing", true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            animator.SetBool("Focusing", false);
+        }
     }
 }

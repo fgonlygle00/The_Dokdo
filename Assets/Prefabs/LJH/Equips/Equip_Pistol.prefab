@@ -437,6 +437,10 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5b2b7260c3d595a45a622af3db645be8, type: 2}
+  - {fileID: 2100000, guid: 5b2b7260c3d595a45a622af3db645be8, type: 2}
+  - {fileID: 2100000, guid: 5b2b7260c3d595a45a622af3db645be8, type: 2}
+  - {fileID: 2100000, guid: 5b2b7260c3d595a45a622af3db645be8, type: 2}
+  - {fileID: 2100000, guid: 5b2b7260c3d595a45a622af3db645be8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -504,8 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd0efe561c8ee842a70f679d4b027b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 1
-  attackDistance: 1
+  attackRate: 50
+  attackDistance: 100
   doesGatherResources: 0
   doesDealDamage: 1
   damage: 20

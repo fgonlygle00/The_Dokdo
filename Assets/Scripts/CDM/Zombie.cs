@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-public class Zombie : MonoBehaviour
+public class Zombie : MonoBehaviour , IDamagable
 {
 	public float health;
+	public int damage;
 
 	// 몬스터의 현재 상태
 	public AIState State;
@@ -105,6 +106,7 @@ public class Zombie : MonoBehaviour
 
 				case AIState.Attacking:
 					anim.SetBool(hashAttack, true);
+					PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(damage);
 					break;
 
 				case AIState.Wandering:
