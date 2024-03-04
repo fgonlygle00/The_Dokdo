@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
 
     [Header("Selected Item")]
     private ItemSlot selectedItem;
-    private int selectedItemIndex;
+    public int selectedItemIndex;
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
     public TextMeshProUGUI selectedItemStatNames;
