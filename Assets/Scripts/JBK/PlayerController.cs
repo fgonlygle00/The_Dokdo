@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     {
 
         playerConditions = GetComponent<PlayerConditions>();
-        DataManager.Instance.SetPlayerData();
+        //DataManager.Instance.SetPlayerData();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
