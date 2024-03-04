@@ -140,7 +140,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 1
     m_Colors:
-    - _Color: {r: 0.13689765, g: 0.24537748, b: 0.29880783, a: 0}
+    - _Color: {r: 0.19205536, g: 0.4545171, b: 0.5837893, a: 0}
     - _EdgeColor: {r: 0.47912958, g: 0.9150943, b: 0.6765475, a: 1}
     - _Edge_Color: {r: 0.2507565, g: 0.3301887, b: 0.28799033, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
