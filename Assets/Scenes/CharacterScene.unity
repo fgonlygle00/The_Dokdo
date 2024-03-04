@@ -9554,10 +9554,10 @@ MonoBehaviour:
     uiBar: {fileID: 592322060}
   stress:
     curValue: 0
-    maxValue: 500
+    maxValue: 100
     startValue: 0
     regenRate: 15
-    decayRate: 15
+    decayRate: 0
     uiBar: {fileID: 1823078480}
   hunger:
     curValue: 0
@@ -9590,6 +9590,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   lineSize: 16
+  linePosition: 1
   vg: {fileID: 826534571}
   vignetteIntensityIncrement: 0.1
 --- !u!1001 &218349572
@@ -88955,7 +88956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.14308888, g: 0, b: 0.26415092, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -93791,7 +93792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
+  m_Color: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

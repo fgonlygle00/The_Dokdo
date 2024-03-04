@@ -4,7 +4,7 @@ using UnityEngine;
 public class MonsterDataManager : MonoBehaviour
 {
 	public static MonsterDataManager Instance;
-	private List<MonsterData> monsters = new List<MonsterData>();
+	public List<MonsterData> monsters = new List<MonsterData>();
 
 	void Awake()
 	{
@@ -18,8 +18,12 @@ public class MonsterDataManager : MonoBehaviour
 			Destroy(gameObject);
 		}
 	}
+    private void Start()
+    {
+        //DataManager.instance
+    }
 
-	public void RegisterMonster(MonsterData monsterData)
+    public void RegisterMonster(MonsterData monsterData)
 	{
 		monsters.Add(monsterData);
 	}

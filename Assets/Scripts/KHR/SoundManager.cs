@@ -11,20 +11,7 @@ public class SoundManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    // 리소스 폴더에서 랜덤한 오디오 파일 재생
-    public void PlayRandomAudioFromResources()
-    {
-        Object[] audioFiles = Resources.LoadAll(audioFolderPath, typeof(AudioClip));
-
-        if (audioFiles.Length > 0)
-        {
-            int randomIndex = Random.Range(0, audioFiles.Length);
-            AudioClip audioClip = audioFiles[randomIndex] as AudioClip;
-
-            audioSource.clip = audioClip;
-            audioSource.Play();
-        }
-    }
+  
 
     // 리소스 폴더에서 특정 오디오 파일 재생
     public void PlayAudioFromResources(string audioFileName)
@@ -37,4 +24,6 @@ public class SoundManager : MonoBehaviour
             audioSource.Play();
         }
     }
+
+
 }
