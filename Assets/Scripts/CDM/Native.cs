@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-public class Native : MonoBehaviour
+public class Native : MonoBehaviour, IDamagable
 {
 	// 몬스터의 현재 상태
 	public AIState State;
 	public ItemData[] dropOnDeath;
 	public float health;
+	public int damage;
 
 	// 추적 사정거리
 	public float traceDistance = 10.0f;
@@ -105,6 +106,7 @@ public class Native : MonoBehaviour
 
 				case AIState.Attacking:
 					anim.SetBool(hashAttack, true);
+					PlayerController.instance.GetComponent<IDamagable>().TakePhysicalDamage(damage);
 					break;
 
 				case AIState.Wandering:

@@ -2219,7 +2219,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2246,15 +2246,10 @@ MonoBehaviour:
   health: 100
   State: 0
   dropOnDeath: []
-  traceDistance: 10
+  traceDistance: 20
   attackDistance: 2
   wanderDistance: 20
   isDie: 0
-  audioSource: {fileID: 0}
-  attackSound: {fileID: 0}
-  damageSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  wanderSound: {fileID: 0}
 --- !u!65 &7258265163132902886
 BoxCollider:
   m_ObjectHideFlags: 0

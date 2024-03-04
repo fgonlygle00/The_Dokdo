@@ -126,7 +126,7 @@ public class Bear : MonoBehaviour, IDamagable
 	// 정지 및 배회 상태에서의 업데이트 로직
 	private void PassiveUpdate()
 	{
-		Debug.Log(agent.remainingDistance);
+		
 		if (aiState == AIState.Wandering && agent.remainingDistance < 2.0f)
 		{
 		
@@ -188,7 +188,7 @@ public class Bear : MonoBehaviour, IDamagable
 
 		// 아래의 코드는 애니메이션 속도를 NavMeshAgent의 이동 속도에 맞춰 조정합니다.
 		// 이는 캐릭터의 이동 속도가 걷기 속도로 변경될 때 애니메이션 속도도 그에 맞춰 조정되도록 합니다.
-		//animator.speed = agent.speed / walkSpeed;       // 이동 속도에 따른 애니메이션 속도 조정
+		animator.speed = agent.speed / walkSpeed;       // 이동 속도에 따른 애니메이션 속도 조정
 	}
 
 	// 새로운 위치로 배회 시작

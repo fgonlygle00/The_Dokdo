@@ -30,8 +30,8 @@ public class ItemData : ScriptableObject // 상속
     [Header("Info")]
     public string displayName;
     public string description;
-    public ItemType type;
-    public Sprite icon;
+    public ItemType type; 
+    public Sprite icon; // 아이템 스프라이트
     public GameObject dropPrefab;
 
     [Header("Stacking")]

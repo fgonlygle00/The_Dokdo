@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class UseShop : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class UseShop : MonoBehaviour
     {
         shopWindow.SetActive(true);
         PlayerController.instance.ToggleCursor(true);
+        PurchaseInfoAlarm.instance.AlarmTextAlphaZero();
     }
 
     private void OnTriggerExit(Collider other)
@@ -18,25 +18,38 @@ public class UseShop : MonoBehaviour
         PlayerController.instance.ToggleCursor(false);
     }
 
+
     // 사과x1 = 나무x2
     public void ShopList1()
     {
         if (shopWindow.activeInHierarchy)
         {
+            int woodIndex = -1;
+
             for (int i = 0; i < Inventory.instance.slots.Length; i++)
             {
-                if (Inventory.instance.slots[i].item != null && Inventory.instance.slots[i].item.displayName == "나뭇가지")
+                if (Inventory.instance.slots[i].item != null)
                 {
-                    if (Inventory.instance.slots[i].quantity >= 2)
-                    {
-                        Inventory.instance.slots[i].quantity -= 2;
-                        Inventory.instance.AddItem(itemData[0]);
-                        RemoveItem(i);
-                        return;
-                    }
-                    else Debug.Log("나뭇가지가 부족합니다");
+                    if (Inventory.instance.slots[i].item.displayName == "나뭇가지" && woodIndex == -1)
+                        woodIndex = i;
                 }
             }
+
+            if (woodIndex != -1) // 현재 아이템이 나뭇가지가 있다는 소리
+            {
+                if (Inventory.instance.slots[woodIndex].quantity >= 2)
+                {
+                    Inventory.instance.slots[woodIndex].quantity -= 2;
+                    Inventory.instance.AddItem(itemData[0]);
+
+                    PurchaseInfoAlarm.instance.PurchaseAlarm();
+
+                    RemoveItem(woodIndex);
+                    return;
+                }
+            }
+
+            PurchaseInfoAlarm.instance.ShortageAlarm();
         }
     }
 
@@ -45,20 +58,32 @@ public class UseShop : MonoBehaviour
     {
         if (shopWindow.activeInHierarchy)
         {
+            int stoneIndex = -1;
+
             for (int i = 0; i < Inventory.instance.slots.Length; i++)
             {
-                if (Inventory.instance.slots[i].item != null && Inventory.instance.slots[i].item.displayName == "돌")
+                if (Inventory.instance.slots[i].item != null)
                 {
-                    if (Inventory.instance.slots[i].quantity >= 1)
-                    {
-                        Inventory.instance.slots[i].quantity--;
-                        Inventory.instance.AddItem(itemData[1]);
-                        RemoveItem(i);
-                        return;
-                    }
-                    else Debug.Log("돌이 부족합니다");
+                    if (Inventory.instance.slots[i].item.displayName == "돌" && stoneIndex == -1)
+                        stoneIndex = i;
                 }
             }
+
+            if (stoneIndex != -1) // 현재 아이템이 나뭇가지가 있다는 소리
+            {
+                if (Inventory.instance.slots[stoneIndex].quantity >= 1)
+                {
+                    Inventory.instance.slots[stoneIndex].quantity--;
+                    Inventory.instance.AddItem(itemData[1]);
+
+                    PurchaseInfoAlarm.instance.PurchaseAlarm();
+
+                    RemoveItem(stoneIndex);
+                    return;
+                }
+            }
+
+            PurchaseInfoAlarm.instance.ShortageAlarm();
         }
     }
 
@@ -74,29 +99,30 @@ public class UseShop : MonoBehaviour
             {
                 if (Inventory.instance.slots[i].item != null)
                 {
-                    if (Inventory.instance.slots[i].item.displayName == "나뭇가지")
-                    {
+                    if (Inventory.instance.slots[i].item.displayName == "나뭇가지" && woodIndex == -1)
                         woodIndex = i;
-                    }
-                    else if (Inventory.instance.slots[i].item.displayName == "돌")
-                    {
+                    if (Inventory.instance.slots[i].item.displayName == "돌" && stoneIndex == -1)
                         stoneIndex = i;
-                    }
-                }
-
-                if (woodIndex != -1 && stoneIndex != -1) // 두 아이템이 모두 인벤토리에 있는 경우
-                {
-                    if (Inventory.instance.slots[woodIndex].quantity >= 5 && Inventory.instance.slots[stoneIndex].quantity >= 3)
-                    {
-                        Inventory.instance.slots[woodIndex].quantity -= 5;
-                        Inventory.instance.slots[stoneIndex].quantity -= 3;
-                        Inventory.instance.AddItem(itemData[2]);
-                        RemoveItem(woodIndex);
-                        RemoveItem(stoneIndex);
-                        return;
-                    }
                 }
             }
+
+            if (woodIndex != -1 && stoneIndex != -1) // 현재 아이템이 나뭇가지가 있다는 소리
+            {
+                if (Inventory.instance.slots[woodIndex].quantity >= 5 && Inventory.instance.slots[stoneIndex].quantity >= 3)
+                {
+                    Inventory.instance.slots[woodIndex].quantity -= 5;
+                    Inventory.instance.slots[stoneIndex].quantity -= 3;
+                    Inventory.instance.AddItem(itemData[2]);
+
+                    PurchaseInfoAlarm.instance.PurchaseAlarm();
+
+                    RemoveItem(woodIndex);
+                    RemoveItem(stoneIndex);
+                    return;
+                }
+            }
+
+            PurchaseInfoAlarm.instance.ShortageAlarm();
         }
     }
 
@@ -107,6 +133,7 @@ public class UseShop : MonoBehaviour
             Inventory.instance.slots[index].item = null;
             Inventory.instance.ClearSeletecItemWindow();
         }
+
         Inventory.instance.UpdateUI();
     }
 }
