@@ -77,8 +77,6 @@ public class PlayerConditions : MonoBehaviour, IDamagable
 
         stress.Subtract(stress.decayRate * Time.deltaTime);
 
-        Debug.Log(stamina.curValue);
-
         if (Input.GetKey(KeyCode.LeftShift) && stamina.curValue > 0f)
         {
             stamina.Subtract(stamina.decayRate * Time.deltaTime);

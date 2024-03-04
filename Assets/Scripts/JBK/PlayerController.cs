@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController instance;
 
+    DataManager dataManager;
     PlayerConditions playerConditions;
     private void Awake()
     {
@@ -40,8 +41,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        dataManager = GetComponent<DataManager>();
         playerConditions = GetComponent<PlayerConditions>();
+        dataManager.SetPlayerData();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void FixedUpdate()
