@@ -82,23 +82,23 @@ public class DataManager : MonoBehaviour
 
     }
 
-    public void SetPlayerData() //플레이어에게 저장된 로드를 덮어씌우기 (스타트시점에 호출)
-    {
-        if (InfoManager.instance.IsLoad&&InfoManager.instance.playerCurValue != null)
-        //불러오기에서 시작했을때만, 데이터를 덮어씌우기를 하기 위해 예외처리
-        {
-            playerConditions.health.curValue = InfoManager.instance.playerCurValue[0];
-            playerConditions.stress.curValue = InfoManager.instance.playerCurValue[1];
-            playerConditions.hunger.curValue = InfoManager.instance.playerCurValue[2];
-            playerConditions.stamina.curValue = InfoManager.instance.playerCurValue[3];
-            GameManager.instance.PlayerObject.transform.position = InfoManager.instance.playerPositions;
-            // 로드했을때 플레이어의 위치값 초기화 
-        }
-        else
-        {
-            Debug.Log("플레이어 컨디션 데이터가 존재하지 않습니다.");
-        }
-    }
+    //public void SetPlayerData() //플레이어에게 저장된 로드를 덮어씌우기 (스타트시점에 호출)
+    //{
+    //    if (InfoManager.instance.IsLoad&&InfoManager.instance.playerCurValue != null)
+    //    //불러오기에서 시작했을때만, 데이터를 덮어씌우기를 하기 위해 예외처리
+    //    {
+    //        playerConditions.health.curValue = InfoManager.instance.playerCurValue[0];
+    //        playerConditions.stress.curValue = InfoManager.instance.playerCurValue[1];
+    //        playerConditions.hunger.curValue = InfoManager.instance.playerCurValue[2];
+    //        playerConditions.stamina.curValue = InfoManager.instance.playerCurValue[3];
+    //        GameManager.instance.PlayerObject.transform.position = InfoManager.instance.playerPositions;
+    //        // 로드했을때 플레이어의 위치값 초기화 
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("플레이어 컨디션 데이터가 존재하지 않습니다.");
+    //    }
+    //}
 
     public void SetMonsterData()//몬스터에게 저장된 로드를 덮어씌우기 (스타트시점에 호출)
     {
