@@ -386,7 +386,6 @@ GameObject:
   - component: {fileID: 7981536350018851198}
   - component: {fileID: 7981536350015426896}
   - component: {fileID: 7981536350016426896}
-  - component: {fileID: 4561396039077762953}
   m_Layer: 0
   m_Name: Cylinder.006
   m_TagString: Untagged
@@ -463,33 +462,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &4561396039077762953
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7981536350018620766}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &8032744790359466038
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,8 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd0efe561c8ee842a70f679d4b027b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 1
-  attackDistance: 1
+  attackRate: 50
+  attackDistance: 100
   doesGatherResources: 0
   doesDealDamage: 1
   damage: 20
