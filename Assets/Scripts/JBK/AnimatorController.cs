@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AnimatorController : MonoBehaviour
 {
+    public float moveSpeed = 10f;
+
+    public float turnSpeed = 80f;
+
     private Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -46,5 +50,20 @@ public class AnimatorController : MonoBehaviour
         //{
         //    animator.SetTrigger("Attacking");
         //}
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("Attack");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            animator.SetBool("Focusing", true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            animator.SetBool("Focusing", false);
+        }
     }
 }
