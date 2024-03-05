@@ -2677,7 +2677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -790, y: -465}
+  m_AnchoredPosition: {x: -790, y: -400}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &310695215
@@ -7591,6 +7591,7 @@ MonoBehaviour:
   - {fileID: 1142896426}
   - {fileID: 1239441512}
   - {fileID: 1623310339}
+  slots: []
   inventoryWindow: {fileID: 755336712}
   dropPosition: {fileID: 989786796}
   selectedItemIndex: 0
