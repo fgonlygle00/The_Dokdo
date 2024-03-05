@@ -65,34 +65,34 @@ public class InfoManager : MonoBehaviour
         //해당 주석 처리 부분은 메인씬을 불러올때 처리(메인씬에 있는 기존 매니저들이 처리하면 되게끔,,)
 
     }
-    //public void LoadGame2()
-    //{
-       
-    //    if (!File.Exists(savePath))
-    //    {
-    //        // 저장된 게임 파일이 없을 경우 로드할 수 없음을 알림
-    //        Debug.Log("저장된 게임이 없습니다.");
-    //        return;
-    //    }
+    public void LoadGame2()
+    {
+        IsLoad = true;
+        if (!File.Exists(savePath))
+        {
+            // 저장된 게임 파일이 없을 경우 로드할 수 없음을 알림
+            Debug.Log("저장된 게임이 없습니다.");
+            return;
+        }
 
-    //    // 파일에서 저장된 게임 데이터를 읽어옴
-    //    string jsonData = File.ReadAllText(savePath);
-    //    GameSaveData gameSaveData = JsonUtility.FromJson<GameSaveData>(jsonData);
+        // 파일에서 저장된 게임 데이터를 읽어옴
+        string jsonData = File.ReadAllText(savePath);
+        GameSaveData gameSaveData = JsonUtility.FromJson<GameSaveData>(jsonData);
 
-    //    // 플레이어 정보 로드
-    //    playerCurValue = gameSaveData.playerCurValue;
-    //    //playerConditions.SetPlayerData(playerData.health, playerData.stress, playerData.condition, playerData.hunger);
+        // 플레이어 정보 로드
+        playerCurValue = gameSaveData.playerCurValue;
+        //playerConditions.SetPlayerData(playerData.health, playerData.stress, playerData.condition, playerData.hunger);
 
-    //    //// 아이템 정보 로드
-    //    slots = gameSaveData.slots;
+        //// 아이템 정보 로드
+        slots = gameSaveData.slots;
 
 
-    //    // 몬스터 정보 로드
-    //    monsterData = gameSaveData.monsterData;
-    //    //monsterManager.LoadDeadMonsterCount(monsterData.deadMonsterCount);
-    //    //해당 주석 처리 부분은 메인씬을 불러올때 처리(메인씬에 있는 기존 매니저들이 처리하면 되게끔,,)
+        // 몬스터 정보 로드
+        monsterData = gameSaveData.monsterData;
+        //monsterManager.LoadDeadMonsterCount(monsterData.deadMonsterCount);
+        //해당 주석 처리 부분은 메인씬을 불러올때 처리(메인씬에 있는 기존 매니저들이 처리하면 되게끔,,)
 
-    //}
+    }
 }
 
 
