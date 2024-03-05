@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     }
     public PlayerManager playerManager; 
     public GameObject gameOverUI;
-
     private PlayerData playerData;
 
     private void Awake()
