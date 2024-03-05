@@ -42,42 +42,42 @@ The_Dokdo : 대한민국을 지키는 자랑스러운 해군인 주인공,
 * <Invasion_Controller> : 몬스터 충돌시 게임의 오버조건을 관리하기 위한 HP 관리
 
 ### Monster
-* <Bear> : 곰의 ai, 스태이터스, 애니메이션 관리
-* <Native> : 원주민의 ai, 스테이터스, 애니메이션 관리
-* <Rabbit> : 토끼의 ai, 스테이터스, 애니메이션 관리
-* <Zombie> : 좀비의 ai, 스테이터스, 애니메이션 관리
-* <MonsterManager> :  토끼와 곰 같은 동물형 몬스터의 랜덤 스폰 및 생성 주기 관리
-* <MonsterData> : 각각의 몬스터 클래스에서 현재 위치값과 회전값과 체력정보를 인스턴스화 해주는 틀과같은 역할.
-* <MonsterDataManager> : 몬스터가 생성되고 삭제될때 중앙에서 몬스터의 정보를 등록하고 해제하는 역할
+Bear : 곰의 ai, 스태이터스, 애니메이션 관리
+Native : 원주민의 ai, 스테이터스, 애니메이션 관리
+Rabbit : 토끼의 ai, 스테이터스, 애니메이션 관리
+Zombie : 좀비의 ai, 스테이터스, 애니메이션 관리
+MonsterManager :  토끼와 곰 같은 동물형 몬스터의 랜덤 스폰 및 생성 주기 관리
+MonsterData : 각각의 몬스터 클래스에서 현재 위치값과 회전값과 체력정보를 인스턴스화 해주는 틀과같은 역할.
+MonsterDataManager : 몬스터가 생성되고 삭제될때 중앙에서 몬스터의 정보를 등록하고 해제하는 역할
 
 ### <Inventory>
-* <Inventory> : 인벤토리 버튼 관리
-* <ItemSlotUI> : 아이템슬롯 관리
+Inventory : 인벤토리 버튼 관리
+ItemSlotUI : 아이템슬롯 관리
 
 ### <Player>
-* <AnimatorController> : 플레이어의 애니메이션 관리
-* <DamageIndicator> : 플레이어가 데미지를 받을때 발생하는 피격 효과 관리
-* <PlayerConditions> : 플레이어의 컨디션 관리
-* <PlayerController> : 플레이어 이동 및 점프 관리
-* <PlayerManager> : 플레이어의 데이터 관리
+AnimatorController : 플레이어의 애니메이션 관리
+DamageIndicator : 플레이어가 데미지를 받을때 발생하는 피격 효과 관리
+PlayerConditions : 플레이어의 컨디션 관리
+PlayerController : 플레이어 이동 및 점프 관리
+PlayerManager : 플레이어의 데이터 관리
 
 
 -----------------------------------------------------------------------------
 
 ## <U.I>
-* <DayNightCycle> : 맵의 밤 낮구현
-* <DungeonSceneLoad1Zone> : 1구역 던전 입장
-* <DungeonSceneLoad2Zone> : 2구역 던전 입장
-* <DungeonSceneLoad3Zone> : 3구역 던전 입장
-* <EditorScripting> : 가상벽 이미지화
-* <FrameSetting> : 게임 프레임 60으로 설정
-* <LoadingSceneManager> :  게임 씬 전환 시 게임 로딩화면 불러오기
-* <MainSceneLoad>  : 메인 화면 불러오기
-* <OptionUI> : 인게임 esc 누르면 나오는 옵션 창
-* <UseShop> : 상인npc 랑 거래
-* <PurchaseInfoAlarm> :  상인npc 거래 알림 설정
-* <StartSceneLoad> : 게임 시작 화면 불러오기
-* <StartSceneUI> : 게임 시작 화면에있는 ui설정
+DayNightCycle : 맵의 밤 낮구현
+DungeonSceneLoad1Zone : 1구역 던전 입장
+DungeonSceneLoad2Zone : 2구역 던전 입장
+DungeonSceneLoad3Zone : 3구역 던전 입장
+EditorScripting : 가상벽 이미지화
+FrameSetting : 게임 프레임 60으로 설정
+LoadingSceneManager :  게임 씬 전환 시 게임 로딩화면 불러오기
+MainSceneLoad  : 메인 화면 불러오기
+OptionUI : 인게임 esc 누르면 나오는 옵션 창
+UseShop : 상인npc 랑 거래
+PurchaseInfoAlarm :  상인npc 거래 알림 설정
+StartSceneLoad : 게임 시작 화면 불러오기
+StartSceneUI : 게임 시작 화면에있는 ui설정
 
 
 ### 장르 : 3D 공포 스릴러 서바이벌
