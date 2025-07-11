@@ -111,3 +111,4 @@ The_Dokdo : 대한민국을 지키는 자랑스러운 해군인 주인공,
 
 ## 자세한  정보는 팀 노션에서 
 
+https://teamsparta.notion.site/1-30mg-2c8a0dace8f343218273b7e22d5cc73a
